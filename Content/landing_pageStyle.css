@@ -1,0 +1,132 @@
+﻿body {
+}
+
+img {
+    mix-blend-mode: multiply;
+}
+
+a, button {
+    touch-action: manipulation;
+}
+
+.row {
+    align-items: center;
+    display: grid;
+    justify-content: center;
+}
+
+footer {
+    text-align: center;
+    background-color: #0f11134d;
+    color: white;
+}
+
+    footer a {
+        color: #ee6c4d;
+    }
+
+        footer a:hover {
+            color: white;
+        }
+
+.jumbotron {
+    /*hasParallax ":true,"dimRatio":70,"minHeight":75*/
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https:\/\/exceptionallyaveragethroughtheireyes.files.wordpress.com\/2021\/06\/bio-threat-sensor-research.jpeg');
+    text-align: center;
+}
+
+#about :not(:last-child) {
+    /*background-color: #fff3e4;*/
+}
+
+#about a {
+    color: #ee6c4d;
+    border-bottom: 1px solid black;
+    padding: 1px;
+}
+
+#account {
+    background-image: url('https://doylestarter.files.wordpress.com/2020/07/alvaro-serrano-hjwkmkehbco-unsplash.jpg');
+}
+
+.btn {
+    margin: 5px;
+}
+
+p {
+    font: 18px Source Serif Pro;
+}
+
+h2 {
+    font: Overpass;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#survey {
+    background-color: #0f11134d;
+    margin-bottom: 25px;
+}
+/*
+//https://codepen.io/P1N2O/pen/pyBNzX
+//
+*/
+
+body {
+    background: linear-gradient(-45deg, #ee7752, #3ce751, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+b {
+    color: lightgreen;
+}
+
+table, tr, th, td {
+    border: 1px solid red;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.nav > li {
+    margin-left: unset;
+}
+
+.glyphicon.spinning {
+    animation: spin 1s infinite linear;
+    -webkit-animation: spin2 1s infinite linear;
+}
+
+@keyframes spin {
+    from {
+        transform: scale(1) rotate(0deg);
+    }
+
+    to {
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin2 {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}

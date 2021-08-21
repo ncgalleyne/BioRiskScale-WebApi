@@ -1,0 +1,62 @@
+﻿
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th style="background-color:lightgreen">Time Submitted</th>
+            <th>Reservoir Type</th>
+            <th>Reservoir Endemicity</th>
+            <th>Host Endemicity</th>
+            <th>Agent Relatives</th>
+            <th>Agent Species</th>
+            <th>Public Awareness</th>
+            <th>CFR</th>
+            <th>IFR</th>
+            <th>GHSI - Compliance</th>
+            <th>Contact Rate</th>
+            <th>Degree of Contact</th>
+            <th>GHSI - Detection</th>
+            <th>Drug Treatment</th>
+            <th>Risk Environment</th>
+            <th>Symptom Induced Fear</th>
+            <th>Generation Time</th>
+            <th>History</th>
+            <th>Possible Modes of Infection</th>
+            <th>Environmental Persistance</th>
+            <th>Infectivity/Illness Overlap</th>
+            <th>Duration of Naturally Acquired Immunity</th>
+            <th>GHSI - Health System</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dta in Model.Data)
+        {
+            <tr>
+                <td style="background-color:lightgreen">@dta.Date</td>
+                <td>@dta.ReservoirType</td>
+                <td>@dta.ReservoirEndemicity</td>
+                <td>@dta.HostEndimicity</td>
+                <td>@dta.agent_relatives</td>
+                <td>@dta.agent_species</td>
+                <td>@dta.awareness</td>
+                <td>@dta.cfr</td>
+                <td>@dta.ifr</td>
+                <td>@dta.Compliance</td>
+                <td>@dta.ContactRate</td>
+                <td>@dta.DegreeOfContact</td>
+                <td>@dta.Detection</td>
+                <td>@dta.DrugTreatment</td>
+                <td>@dta.Environment</td>
+                <td>@dta.Fear</td>
+                <td>@dta.GenerationTime</td>
+                <td>@dta.History</td>
+                <td>@dta.PossibleModes</td>
+                <td>@dta.Persistance</td>
+                <td>@dta.Overlap</td>
+                <td>@dta.Immunity</td>
+                <td>@dta.System</td>
+            </tr>
+        }
+
+    </tbody>
+</table>
+

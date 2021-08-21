@@ -1,0 +1,12 @@
+﻿@model WebApplication1.ViewModels.SurveyVM
+<div class="input-group">
+    <span class="input-group-addon" id="basic-addon1">Country</span>
+    <input class="form-control" id="countries-input" required list="countries" placeholder="select a country .." />
+</div>
+
+<datalist class="custom-select" id="countries">
+    @foreach(var country in Model.Countries)
+    {
+        <option value="@country.Name"></option>
+    }
+</datalist>

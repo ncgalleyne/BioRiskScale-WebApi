@@ -1,0 +1,11 @@
+﻿body {
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+}
+
+.nav > li{
+    margin-left: 10px;
+}

@@ -1,0 +1,364 @@
+﻿@model WebApplication1.ViewModels.SurveyVM
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" integrity="sha512-6S2HWzVFxruDlZxI3sXOZZ4/eJ8AcxkQH1+JjSe/ONCEqR9L4Ysq5JdT5ipqtzU7WHalNwzwBv+iE51gNHJNqQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+@*<link href="~/Content/form.css" rel="stylesheet" />*@
+@*<link href="~/Content/list.css" rel="stylesheet" />*@
+<link href="~/Content/table.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">BioRisk Survey</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <button type="button" class="btn" data-toggle="modal" data-target="#accountModal">Create an Account</button>
+                    </li>
+                    <li>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Login</button>
+                    </li>
+                    
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <button id="beginBtn" style="display:none" type="button" class="btn" data-toggle="modal" data-target="#surveyModal">Begin Survey</button>
+                    </li>
+                </ul>
+                <form class="navbar-form navbar-right">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+<section id="header">
+    <p>welcome to the biorisk survey, here are the overall <a>goals</a> of what this survey tries to accomplish. <a>here's</a> what you'll do and 
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#helpModal">How</button> you do it . <h3>for best eval, we recommend you <a>create an account</a></h3> <p>Please click 
+    <button style="outline: 1px solid red" class="btn" id="surveyBtn" data-toggle="modal" data-target="#surveyModal">here</button> to continue into the survey</p>
+    
+</section>
+
+<section @*style="display:none"*@ id="survey-section" class="section">
+
+    <div id="score-div" style="display:none;border-radius: 8px;">
+        <label for="#score">score: </label>
+        <input disabled value="0" type="number" id="score" />
+        <input style="display:none" id="country_name" type="text" />
+        <input style="display:none" id="agent_name" type="text" />
+    </div>
+    <div class="row">
+        <div id="survey">
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="loginModalLabel">Login to continue</h3>
+                <div class="input-group mb-3">
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-envelope" id="basic-addon1"></span>
+                        <input autofocus type="email" id="user-email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-alert" id="basic-addon1"></span>
+                        <input type="password" id="user-pwd" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div style="margin: 10px">
+                    <button type="button" id="closeBtn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="loginBtn" class="btn btn-primary">login</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="accountModal" tabindex="-1" role="dialog" aria-labelledby="accountModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="accountModalLabel">Account Creation</h3>
+                <div class="input-group mb-3">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">First Name:</span>
+                        <input autofocus required type="text" class="form-control" id="fName" placeholder="First Name" aria-label="First Namee" aria-describedby="basic-addon1" enterkeyhint="next">
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Last Name:</span>
+                        <input type="text" class="form-control" id="lName" placeholder="Last Name" aria-label="Last Name" aria-describedby="basic-addon1" enterkeyhint="next">
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group">
+                        <span class="glyphicon glyphicon-inbox input-group-addon" id="basic-addon1"></span>
+                        <input type="text" class="form-control" id="email" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" enterkeyhint="next">
+                    </div>
+
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group">
+                        <span class="glyphicon glyphicon-alert input-group-addon" id="basic-addon1"></span>
+                        <input type="password" class="form-control" id="pwd" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" enterkeyhint="next">
+                    </div>
+
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group">
+                        <span class="glyphicon glyphicon-globe input-group-addon" id="basic-addon1"></span>
+                        <input type="text" class="form-control" id="location" placeholder="Geographic Location" aria-label="Location" aria-describedby="basic-addon1" enterkeyhint="next">
+                    </div>
+
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group">
+                        <span class="glyphicon glyphicon-user input-group-addon" id="basic-addon1"></span>
+                        <input type="text" class="form-control" id="occupation" placeholder="occupation" aria-label="Location" aria-describedby="basic-addon1" enterkeyhint="done">
+                    </div>
+
+                </div>
+                <div style="margin: 10px">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="createBtn" type="button" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Survey Modal -->
+<div class="modal fade" id="surveyModal" tabindex="-1" role="dialog" aria-labelledby="surveyModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="surveyModalLabel">Refine search criteria</h3>
+                <div class="input-group mb-3">
+                    @Html.Partial("_Countries", Model)
+                </div>
+                <div class="input-group mb-3">
+                    @Html.Partial("_Agent", Model)
+                </div>
+                <div style="margin: 10px">
+                    <button type="button" id="closeBtn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="proceedBtn" class="btn btn-primary">Proceed</button>
+                </div>
+
+            </div>
+            <div class="modal-body">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--How to Modal -->
+<div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div style="display:block;background-color:white" class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="helpModalLabel">How to use biorisk survey:</h3>
+                <p>
+                    Based on your geographic location, we have pre-populated data provided by the Global Health Index.
+                </p>
+                <p>
+                    This is our only recomendation, but should you want to choose a different variable (highly unrecommended),
+                    please visit the following <a>websites and sources</a> for more information.
+                </p>
+
+                <p>
+                    below is a key to show symbols used and their meaning
+                </p>
+            </div>
+            <div style="display:flex;justify-content:center" class="modal-body">
+                <img style="margin: 10px" src="https://lh3.googleusercontent.com/ACFls7XuJQ9EBj1NBhMo8z2wITGuHKnBKEny7yj1B_yZ1g0VRNvJBhU0FnlpTGulnfH8f9uk4GtPvZsIfmFF67jJMENhUKmXTfnrfd5CaxXIYBr5E9FFBCa4B5TMG7tik6WLdf1hSpmOODNwZCiobco97t5wvNl_TTCj6BYm7VVXGda_IlNNDSj5W-F1IW1tGap6pWjuPqL-WeGHEf5NcazG_CJ1Myh69FJIzoFQCPSzUd3dCU2Wsnexg3_tLx0fJGL81DihDz57L0dnLX35hAQbAfE65Ua4WmPGZD4qZYA1wtoQaCeh2taqdrcIoofHsoYbBhqHIM9U43JNxuwsu0bC5DvgBHiDG-4snSMFfy2iwU94sftw9ucfkUpNnyqs1HmIcXH3DAWCKRq7xCQnUllHArIFMtRtzHDj4E9gMUtbXGWsTYWpAbAA_La78gCilD1_AN5sCeg_zr5ObFc7Ilnpc5vWQ2-ShSydXx5pxlGp--vRRxAiLO3gd7C1HgHsEg5aH-Bfg5jazZKQ0jpMYcMHVPA4EyEOIwmTCV_HoVjyIKUKJD7Yn-2Ca6eAeF1MooOmzBD_97aVvxldmNdiM5fABs9FoAhO9EEqf7gkgGMiNg3h1KFcxuvxRWXV2I-dn2AM6LM7R77hEFPQF9tZTnxZWaQPY3DpaWvfhpDjEHwIJpTsAVwgnxLVNecZuIeOG5FvNfjMoBtK2d_ElEeK2qHJ=w352-h224-no?authuser=0" />
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+<section id="footnotes"></section>
+
+<script>
+    $(document).ready(function () {
+        var user;
+
+        // create account button click
+        $("#createBtn").click(function () {
+
+            let f_name = $("#fName").val();
+            let l_name = $("#lName").val();
+            let email = $("#email").val();
+            let pwd = $("#pwd").val();
+            let loc = $("#location").val();
+            let occupation = $("#occupation").val();
+
+            if (email != '' && l_name != '' && f_name != '' && pwd != '') {
+                $.ajax({
+                    url: '/Home/CreateAccount',
+                    type: 'post',
+                    data: { f_name: f_name, l_name: l_name, email: email, pwd: pwd, loc: loc, occupation: occupation },
+                    success: function (response) {
+                        console.log(response);
+                        toastr["success"]("Account Created Succesfully :)", "Success");
+                        $("#fName").val('');
+                        $("#lName").val('');
+                        $("#email").val('');
+                        $("#pwd").val('');
+                        $("#location").val('');
+                        $("#occupation").val('');
+
+                        //$('body').html(response);
+                    }
+                });
+
+            }
+        });
+
+        //login button click
+        $('#loginBtn').click(function () {
+            let email = $('#user-email').val();
+            let pwd = $('#user-pwd').val();
+
+
+            if (email != '' && pwd != '') {
+                $.ajax({
+                    //url: '/Home/Login',
+                    url: '/Account/Login',
+                    type: 'post',
+                    data: { email: email, pwd: pwd },
+                    error: function (xhr) {
+                        //alert('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText + ' ' + xhr.responseText);
+                        console.log('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText);
+                    },
+                    success: function (response) {
+                        // complete login by redirecting to ...
+                        user = response;
+                        console.log(user);
+                        $('#user-email').val('');
+                        $('#user-pwd').val('');
+
+                        if (user.FirstName === null && user.Email === null) {
+                            console.log('null user');
+                            toastr["error"]("Wrong Username or Password", "Login Failed");
+                        }
+                        else {
+                            var user_name = user.FirstName;
+                            toastr["success"]("Hi, " + user_name, "Success");
+                            $('#beginBtn').show();
+                        }
+                    }
+                });
+            }
+        });
+
+        $('#proceedBtn').click(function () {
+            let countryName = $('#countries-input').val();
+            let agentName = $('#agents-input').val();
+            $('#country_name').val(countryName);
+            $('#agent_name').val(agentName);
+
+            //loading animation
+            $('.modal-content').html('<button class="btn btn-lg"><span class="glyphicon glyphicon-refresh spinning"></span> Loading...</button>');
+
+            $.ajax({
+                url: '/Survey/Index',
+                type: 'post',
+                data: { countryName: countryName, agentName: agentName },
+                error: function (xhr) {
+                    console.log('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText);
+                },
+                success: function (response) {
+                    // launch survey
+                    $('.modal-content').html('');
+                    $('#survey-start').hide();
+                    user = response;
+                    console.log('done');
+                    $('#survey').html(response);
+                    $('#survey-section').show();
+                    $('#score-div').show();
+                }
+            });
+        })
+
+    });
+</script>
+<script>
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-center",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "2500",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+</script>
+
+<script>
+    $(".panel-heading").parent('.panel').hover(
+        function () {
+            $(this).children('.collapse').collapse('show');
+        }, function () {
+            $(this).children('.collapse').collapse('hide');
+        }
+    );
+</script>

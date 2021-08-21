@@ -1,0 +1,14 @@
+﻿@model WebApplication1.ViewModels.SurveyVM
+<div class="input-group">
+    @*<label class="input-group-text" for="agents">Select an Agent from the list for evaluation </label><br />*@
+    <span class="input-group-addon" id="basic-addon1">Agent</span>
+    <input class="form-control" id="agents-input" list="agents" placeholder="select an agent .." required />
+</div>
+
+<datalist class="custom-select" id="agents">
+    @foreach(var agent in Model.Agents)
+    {
+        <option value="@agent.Name"></option>
+    }
+</datalist>
+<br />

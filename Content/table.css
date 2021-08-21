@@ -1,0 +1,132 @@
+﻿body {
+    background-color: #f5f5f5;
+}
+
+table {
+    background-color: #d1ecf1;
+    border-radius: 10px;
+    width: -webkit-fill-available;
+}
+
+table, th, td {
+    border-bottom: 1px solid #ddd;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+td{
+    text-align: center;
+    background-color: white;
+}
+
+td:hover {
+    background-color: #f5f5f5;
+}
+
+td:focus {
+    background: #fff877;
+}
+
+h1 {
+    font-size: 15pt;
+    color: #20bcd5;
+    text-align: center;
+    padding: 18px 0 18px 0;
+    margin: 0 0 10px 0;
+}
+
+h1 span {
+        border: 4px dashed #20bcd5;
+}
+
+th{
+    border-right: none;
+}
+
+tr {
+    border-bottom: 1px solid #ddd;
+}
+
+tr span{
+    color: red;
+}
+
+    tr .glyphicon-info-sign {
+        color: #337ab7;
+        margin-left: 0.1em;
+    }
+
+#survey div{
+    /*display: grid;*/
+}
+
+p{
+    font-weight: normal;
+}
+
+a{
+    text-decoration: none;
+}
+
+.modal-content {
+    background-color: #00000000;
+    display: flex;
+    justify-content: center;
+}
+
+.modal-header {
+    width: -webkit-fill-available;
+    background-color: white;
+}
+
+.btn-lg {
+    color: white;
+    background: transparent;
+}
+
+.glyphicon.spinning {
+    animation: spin 1s infinite linear;
+    -webkit-animation: spin2 1s infinite linear;
+}
+
+h4{
+    text-align:center;
+}
+
+@keyframes spin {
+    from {
+        transform: scale(1) rotate(0deg);
+    }
+
+    to {
+        transform: scale(1) rotate(360deg);
+    }
+}
+
+@-webkit-keyframes spin2 {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+.sr-only{
+    display: contents;
+}
+
+.nav{
+    display: flex;
+    align-items: center;
+}
+
+.nav > li{
+    margin-left: 10px;
+}
+
+button{
+    touch-action: manipulation;
+}

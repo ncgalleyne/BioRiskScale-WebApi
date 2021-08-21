@@ -1,0 +1,427 @@
+﻿@model WebApplication1.ViewModels.GHSIVM
+<h1> <span style="padding-left: 10px; padding-right: 10px"> GHSI</span></h1>
+
+<div class="progress">
+    <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
+        <span class="sr-only">27% ( 6 answered / 22 total )</span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-9">
+        <div style="overflow-x: auto">
+            <table id="prevention">
+                <tr>
+                    <th colspan="10">
+                        Prevention<span data-toggle="tooltip" title="required">*</span>
+                                  <p>@Model.Metrics.Prevention.Description</p>
+                    </th>
+                </tr>
+                <tr>
+                    @foreach (var type in Model.Preventions)
+                    {
+                        <td value="@type.Host">@type.Name%</td>
+                    }
+                </tr>
+            </table>
+        </div>
+
+        <div style="overflow-x: auto">
+            <table id="detection">
+                <tr>
+                    <th colspan="10">
+                        Detection<span data-toggle="tooltip" title="required">*</span>
+                                 <p>@Model.Metrics.Detection.Description</p>
+                    </th>
+                </tr>
+                <tr>
+                    @foreach (var type in Model.Detections)
+                    {
+                        <td value="@type.Host">@type.Name%</td>
+                    }
+                </tr>
+            </table>
+        </div>
+
+        <div style="overflow-x: auto">
+            <table id="response">
+                <tr>
+                    <th colspan="10">
+                        Rapid Response<span data-toggle="tooltip" title="required">*</span>
+                                      <p>@Model.Metrics.RapidResponse.Description</p>
+                    </th>
+                </tr>
+                <tr>
+                    @foreach (var type in Model.Responses)
+                    {
+                        <td value="@type.Host">@type.Name%</td>
+                    }
+                </tr>
+            </table>
+        </div>
+
+        <div style="overflow-x: auto">
+            <table id="system">
+                <tr>
+                    <th colspan="10">
+                        Systems<span data-toggle="tooltip" title="required">*</span>
+                               <p>@Model.Metrics.HealthSystem.Description</p>
+                    </th>
+                </tr>
+                <tr>
+                    @foreach (var type in Model.Systems)
+                    {
+                        <td value="@type.Host">@type.Name%</td>
+                    }
+                </tr>
+            </table>
+        </div>
+
+        <div style="overflow-x: auto">
+            <table id="compliance">
+                <tr>
+                    <th colspan="10">
+                        Compliance<span data-toggle="tooltip" title="required">*</span>
+                                  <p>@Model.Metrics.Compliance.Description</p>
+                    </th>
+                </tr>
+                <tr>
+                    @foreach (var type in Model.Compliances)
+                    {
+                        <td value="@type.Host">@type.Name%</td>
+                    }
+                </tr>
+            </table>
+        </div>
+
+        <div style="overflow-x: auto">
+            <table id="env">
+                <tr>
+                    <th colspan="10">
+                        Environments<span data-toggle="tooltip" title="required">*</span>
+                                    <p>@Model.Metrics.RiskEnvironment.Description</p>
+                    </th>
+                </tr>
+                <tr>
+                    @foreach (var type in Model.Environments)
+                    {
+                        <td value="@type.Host">@type.Name%</td>
+                    }
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div style="margin-top: 10px;" class="panel-group col-md-3" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div style="background-color:antiquewhite" class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a style="text-decoration: none" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        For more information on how we determined these metrics
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div style="overflow-x:auto" class="panel-body">
+                    <table>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Source</th>
+                        </tr>
+                        <tr>
+                            <td>@Model.Metrics.Prevention.Name</td>
+                            @{
+                                int count = 1;
+                                foreach (var item in Model.Metrics.Prevention.MetricSources)
+                                {
+                                    <td>
+                                        <a target="_blank" href="@item.MetricLink">@count@*@item.MetricLabel*@</a>
+                                    </td>
+                                    count++;
+                                }
+
+                                foreach (var item in Model.Metrics.Prevention.AgentSources)
+                                {
+                                    <td>
+                                        <a target="_blank" href="@item.AgentLink">@count@*@item.AgentLabel*@</a>
+                                    </td>
+                                    count++;
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            <td>@Model.Metrics.Detection.Name</td>
+                            @{
+                                count = 1;
+                                foreach (var item in Model.Metrics.Detection.MetricSources)
+                                {
+                                    <td>
+                                        <a target="_blank" href="@item.MetricLink">@count@*@item.MetricLabel*@</a>
+                                    </td>
+                                    count++;
+                                }
+
+                                foreach (var item in Model.Metrics.Detection.AgentSources)
+                                {
+                                    <td>
+                                        <a target="_blank" href="@item.AgentLink">@count@*@item.AgentLabel*@</a>
+                                    </td>
+                                    count++;
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            <td>@Model.Metrics.RapidResponse.Name</td>
+                            @{
+                                count = 1;
+                                foreach (var item in Model.Metrics.RapidResponse.MetricSources)
+                                {
+                                    <td>
+                                        <a target="_blank" href="@item.MetricLink">@count@*@item.MetricLabel*@</a>
+                                    </td>
+                                    count++;
+                                }
+
+                                foreach (var item in Model.Metrics.RapidResponse.AgentSources)
+                                {
+                                    <td>
+                                        <a target="_blank" href="@item.AgentLink">@count@*@item.AgentLabel*@</a>
+                                    </td>
+                                    count++;
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            <td>@Model.Metrics.HealthSystem.Name</td>
+                            @{
+                                count = 1;
+                                foreach (var item in Model.Metrics.HealthSystem.MetricSources)
+                                {
+                                    <td>
+                                        <a target="_blank" href="@item.MetricLink">@count@*@item.MetricLabel*@</a>
+                                    </td>
+                                    count++;
+                                }
+
+                                foreach (var item in Model.Metrics.HealthSystem.AgentSources)
+                                {
+                                    <td>
+                                        <a target="_blank" href="@item.AgentLink">@count@*@item.AgentLabel*@</a>
+                                    </td>
+                                    count++;
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            <td>@Model.Metrics.Compliance.Name</td>
+                            @{
+                                count = 1;
+                                foreach (var item in Model.Metrics.Compliance.MetricSources)
+                                {
+                                    <td>
+                                        <a target="_blank" href="@item.MetricLink">@count@*@item.MetricLabel*@</a>
+                                    </td>
+                                    count++;
+                                }
+
+                                foreach (var item in Model.Metrics.Compliance.AgentSources)
+                                {
+                                    <td>
+                                        <a target="_blank" href="@item.AgentLink">@count@*@item.AgentLabel*@</a>
+                                    </td>
+                                    count++;
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            <td>@Model.Metrics.RiskEnvironment.Name</td>
+                            @{
+                                count = 1;
+                                foreach (var item in Model.Metrics.RiskEnvironment.MetricSources)
+                                {
+                                    <td>
+                                        <a target="_blank" href="@item.MetricLink">@count@*@item.MetricLabel*@</a>
+                                    </td>
+                                    count++;
+                                }
+
+                                foreach (var item in Model.Metrics.RiskEnvironment.AgentSources)
+                                {
+                                    <td>
+                                        <a target="_blank" href="@item.AgentLink">@count@*@item.AgentLabel*@</a>
+                                    </td>
+                                    count++;
+                                }
+                            }
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<input id="resetBtn" type="reset" value="reset" />
+<input id="nextBtn" type="submit" value="next" />
+
+<script>
+    let prevention = -1, detection = -1, response = -1, system = -1, compliance = -1, env = -1;
+
+    $('td').on('mouseenter', function () {
+        if ($(this)[0].style.backgroundColor != 'rgb(255, 248, 119)')
+            $(this)[0].style.backgroundColor = '#f5f5f5';
+    })
+
+    $('td').on('mouseleave', function () {
+        if ($(this)[0].style.backgroundColor != 'rgb(255, 248, 119)')
+            $(this)[0].style.backgroundColor = 'white';
+    })
+
+    // Change input value on label click
+    $('#prevention td').on('click', function () {
+        $('#prevention th')[0].style.border = 'none';
+        if (prevention == -1)
+            prevention = 0;
+        $('#prevention td')[prevention].style.backgroundColor = 'white';
+        let index = $(this).index();
+        $('#prevention td')[index].style.backgroundColor = '#fff877';
+        prevention = index;
+    });
+
+    $('#detection td').on('click', function () {
+        $('#detection th')[0].style.border = 'none';
+        if (detection == -1)
+            detection = 0;
+        $('#detection td')[detection].style.backgroundColor = 'white';
+        let index = $(this).index();
+        $('#detection td')[index].style.backgroundColor = '#fff877';
+        detection = index;
+    });
+
+    $('#response td').on('click', function () {
+        $('#response th')[0].style.border = 'none';
+        if (response == -1)
+            response = 0;
+        $('#response td')[response].style.backgroundColor = 'white';
+        let index = $(this).index();
+        $('#response td')[index].style.backgroundColor = '#fff877';
+        response = index;
+    });
+
+    $('#system td').on('click', function () {
+        $('#system th')[0].style.border = 'none';
+        if (system == -1)
+            system = 0;
+        $('#system td')[system].style.backgroundColor = 'white';
+        let index = $(this).index();
+        $('#system td')[index].style.backgroundColor = '#fff877';
+        system = index;
+    });
+
+    $('#compliance td').on('click', function () {
+        $('#compliance th')[0].style.border = 'none';
+        if (compliance == -1)
+            compliance = 0;
+        $('#compliance td')[compliance].style.backgroundColor = 'white';
+        let index = $(this).index();
+        $('#compliance td')[index].style.backgroundColor = '#fff877';
+        compliance = index;
+    });
+
+    $('#env td').on('click', function () {
+        $('#env th')[0].style.border = 'none';
+        if (env == -1)
+            env = 0;
+        $('#env td')[env].style.backgroundColor = 'white';
+        let index = $(this).index();
+        $('#env td')[index].style.backgroundColor = '#fff877';
+        env = index;
+    });
+
+    $('#nextBtn').on('click', function (e) {
+        e.preventDefault();
+
+        if (!validateAnswers()) {
+            alert('please fill out all remaining fields');
+            return;
+        }
+
+        let t = parseInt($('#prevention td')[prevention].getAttribute('value'));
+        let res = parseInt($('#detection td')[detection].getAttribute('value'));
+        let h = parseInt($('#response td')[response].getAttribute('value'));
+        let o = parseInt($('#system td')[system].getAttribute('value'));
+        let c = parseInt($('#compliance td')[compliance].getAttribute('value'));
+        let environment = parseInt($('#env td')[env].getAttribute('value'));
+        let score = $('#score').val();
+        $('#score').val(parseInt(score) + t + res + h + o + c + environment);
+
+        sessionStorage.prevention = t;
+        sessionStorage.detection = res;
+        sessionStorage.response = h;
+        sessionStorage.system = o;
+        sessionStorage.compliance = c;
+        sessionStorage.environment = environment;
+
+        next();
+    })
+
+    function validateAnswers() {
+        //checking if indices are -1, meaning they never got clicked
+        let validated = true;
+        if (prevention == -1) {
+            $('#prevention th')[0].style.border = '2px groove red'
+            validated = false;
+        }
+        if (detection == -1) {
+            $('#detection th')[0].style.border = '2px groove red'
+            validated = false;
+        }
+        if (response == -1) {
+            $('#response th')[0].style.border = '2px groove red'
+            validated = false;
+        }
+        if (system == -1) {
+            $('#system th')[0].style.border = '2px groove red'
+            validated = false;
+        }
+        if (compliance == -1) {
+            $('#compliance th')[0].style.border = '2px groove red'
+            validated = false;
+        }
+        if (env == -1) {
+            $('#env th')[0].style.border = '2px groove red'
+            validated = false;
+        }
+        return validated;
+    }
+
+    function next() {
+        let countryName = $('#country_name').val();
+        let agentName = $('#agent_name').val();
+
+        $.ajax({
+            url: '/Survey/DrugVaccines',
+            type: 'post',
+            data: { countryName: countryName, agentName: agentName },
+            error: function (xhr) {
+                console.log('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText);
+            },
+            success: function (response) {
+                user = response;
+                $('#survey').html(response);
+            }
+        });
+    }
+</script>
+
+<script>
+    $(".panel-heading").parent('.panel').hover(
+        function () {
+            $(this).children('.collapse').collapse('show');
+        }, function () {
+            $(this).children('.collapse').collapse('hide');
+        }
+    );
+</script>

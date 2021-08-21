@@ -1,0 +1,144 @@
+﻿@model WebApplication1.ViewModels.TransmissionVM
+<div style="overflow-x: auto">
+    <table id="contacts">
+        <tr>
+            <th>Approximate Degree of Contact</th>
+        </tr>
+        <tr>
+            @foreach (var type in Model.Contact)
+            {
+                if (Model.Metrics.DegreeOfContact.Host == type.Host)
+                {
+                    <td id="degree" style="background-color: #fff877;" value="@type.Host">@type.Name</td>
+                }
+                else
+                {
+                    <td style="background-color: #f5f5f5;" value="@type.Host">@type.Name</td>
+                }
+            }
+        </tr>
+    </table>
+</div>
+
+<div style="overflow-x: auto">
+    <table id="modes">
+        <tr>
+            <th>Number of Possible Modes of Infection</th>
+        </tr>
+        <tr>
+            @foreach (var type in Model.PossibleModes)
+            {
+                if (Model.Metrics.PossibleModes.Host == type.Host)
+                {
+                    <td id="pm" style="background-color: #fff877;" value="@type.Host">@type.Name</td>
+                }
+                else
+                {
+                    <td style="background-color: #f5f5f5;" value="@type.Host">@type.Name</td>
+                }
+            }
+        </tr>
+    </table>
+</div>
+
+<div style="overflow-x: auto">
+    <table id="persistance">
+        <tr>
+            <th>Select an Approximate for Environmental Persistance</th>
+        </tr>
+        <tr>
+            @foreach (var type in Model.EnvironmentalPersistance)
+            {
+                <td value="@type.Host">@type.Name</td>
+            }
+        </tr>
+    </table>
+</div>
+
+<div style="overflow-x: auto">
+    <table id="overlap">
+        <tr>
+            <th>Approximate Infectivity Overlap</th>
+        </tr>
+        <tr>
+            @foreach (var type in Model.InfectivityOverlaps)
+            {
+                if (Model.Metrics.InfectivityOverlap.Host == type.Host)
+                {
+                    <td id="infectivity" style="background-color: #fff877;" value="@type.Host">@type.Name</td>
+                }
+                else
+                {
+                    <td style="background-color: #f5f5f5;" value="@type.Host">@type.Name</td>
+                }
+            }
+        </tr>
+    </table>
+</div>
+    <input id="resetBtn" type="reset" value="reset" />
+    <input id="nextBtn" type="submit" value="next" />
+
+<script>
+    let contacts = 0, modes = 0, persistance = 0, overlap = 0;
+
+    // Change input value on label click
+    //$('#contacts td').on('click', function () {
+    //    $('#contacts td')[contacts].style.backgroundColor = 'white';
+    //    let index = $(this).index();
+    //    $('#contacts td')[index].style.backgroundColor = '#fff877';
+    //    contacts = index;
+    //});
+
+    //$('#modes td').on('click', function () {
+    //    $('#modes td')[modes].style.backgroundColor = 'white';
+    //    let index = $(this).index();
+    //    $('#modes td')[index].style.backgroundColor = '#fff877';
+    //    modes = index;
+    //});
+
+    $('#persistance td').on('click', function () {
+        $('#persistance td')[persistance].style.backgroundColor = 'white';
+        let index = $(this).index();
+        $('#persistance td')[index].style.backgroundColor = '#fff877';
+        persistance = index;
+    });
+
+    //$('#overlap td').on('click', function () {
+    //    $('#overlap td')[overlap].style.backgroundColor = 'white';
+    //    let index = $(this).index();
+    //    $('#overlap td')[index].style.backgroundColor = '#fff877';
+    //    overlap = index;
+    //});
+
+    $('#nextBtn').on('click', function (e) {
+        e.preventDefault();
+        //let t = parseInt($('#contacts td')[contacts].getAttribute('value'));
+        //let res = parseInt($('#modes td')[modes].getAttribute('value'));
+        let h = parseInt($('#persistance td')[persistance].getAttribute('value'));
+        //let o = parseInt($('#overlap td')[overlap].getAttribute('value'));
+        let t = parseInt($('#degree')[0].getAttribute('value'));
+        let o = parseInt($('#pm')[0].getAttribute('value'));
+        let res = parseInt($('#infectivity')[0].getAttribute('value'));
+        let score = $('#score').val();
+        $('#score').val(parseInt(score) + t + res + h + o);
+        next();
+    })
+
+    function next() {
+        let countryName = $('#countries-input').val();
+        let agentName = $('#agents-input').val();
+
+        $.ajax({
+            url: '/Survey/GHSI',
+            type: 'post',
+            data: { countryName: countryName, agentName: agentName },
+            error: function (xhr) {
+                console.log('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText);
+            },
+            success: function (response) {
+                user = response;
+                $('#survey').html(response);
+            }
+        });
+    }
+</script>

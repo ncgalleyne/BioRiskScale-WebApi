@@ -1,0 +1,56 @@
+﻿@model WebApplication1.ViewModels.SurveyVM
+@{
+    ViewBag.Title = "Results";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Content/ResultsStyle.css" rel="stylesheet" />
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+<h2>History</h2>
+
+<p>click <a target="_blank" href="/Survey/Citations">here</a> to read more on the metrics and their respective evaluations</p>
+
+<ul class="nav nav-pills">
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="pill" href="#history">History</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="pill" href="#results">Survey Results</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="pill" href="#menu2">Evaluation</a>
+    </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    <div class="tab-pane container" id="history">
+        @{ 
+            if (!User.Identity.IsAuthenticated)
+            {
+                <p>Log in to save survey results</p>
+            }
+            else
+            {
+                <div style="overflow-x:auto" class="row">
+                    @Html.Partial("_Results", Model)
+                </div>
+            }
+        }
+    </div>
+    <div class="tab-pane container fade" id="results">
+        <div style="overflow-x:auto" id="rhr_div"></div>
+        <div @*style="overflow-x:auto"*@ id="transmission_div"></div>
+        <div @*style="overflow-x:auto"*@ id="ghsi_div"></div>
+        <div @*style="overflow-x:auto"*@ id="drug_div"></div>
+        <div @*style="overflow-x:auto"*@ id="bio_div"></div>
+        <div  id="psych_div"></div>
+    </div>
+    <div class="tab-pane container fade" id="menu2">No content</div>
+</div>
+<script src="~/Scripts/graphs/rhr.js"></script>
+<script src="~/Scripts/graphs/transmission.js"></script>
+<script src="~/Scripts/graphs/ghsi.js"></script>
+<script src="~/Scripts/graphs/drugs.js"></script>
+<script src="~/Scripts/graphs/bio_clinical.js"></script>
+<script src="~/Scripts/graphs/psych.js"></script>

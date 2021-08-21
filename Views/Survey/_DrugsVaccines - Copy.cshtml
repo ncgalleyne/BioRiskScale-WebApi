@@ -1,0 +1,92 @@
+﻿@model WebApplication1.ViewModels.DrugVaccinesVM
+<div style="overflow-x: auto">
+    <table id="drug">
+        <tr>
+            <th>Drug Treatments</th>
+        </tr>
+        <tr>
+            @foreach (var type in Model.DrugTreatments)
+            {
+                if (Model.Metrics.DrugTreatment.Host == type.Host)
+                {
+                    <td id="drug-treatment" style="background-color: #fff877;" value="@type.Host">@type.Name</td>
+                }
+                else
+                {
+                    <td style="background-color: #f5f5f5;" value="@type.Host">@type.Name</td>
+                }
+            }
+        </tr>
+    </table>
+</div>
+
+<div style="overflow-x: auto">
+    <table id="vaccine">
+        <tr>
+            <th>Vaccine Treatments</th>
+        </tr>
+        <tr>
+            @foreach (var type in Model.VaccineTreatments)
+            {
+                @*if (Model.Metrics.vaccinetreatment.Host == type.Host)
+                {
+                    <td id="res-type" style="background-color: #fff877;" value="@type.Host">@type.Name</td>
+                }
+                else
+                {
+                    <td style="background-color: #f5f5f5;" value="@type.Host">@type.Name</td>
+                }*@
+            }
+        </tr>
+    </table>
+</div>
+    <input id="resetBtn" type="reset" value="reset" />
+    <input id="nextBtn" type="submit" value="next" />
+
+<script>
+    let drug = 0, vaccine = 0;
+
+    // Change input value on label click
+    //$('#drug td').on('click', function () {
+    //    $('#drug td')[drug].style.backgroundColor = 'white';
+    //    let index = $(this).index();
+    //    $('#drug td')[index].style.backgroundColor = '#fff877';
+    //    drug = index;
+    //});
+
+    //$('#vaccine td').on('click', function () {
+    //    $('#vaccine td')[vaccine].style.backgroundColor = 'white';
+    //    let index = $(this).index();
+    //    $('#vaccine td')[index].style.backgroundColor = '#fff877';
+    //    vaccine = index;
+    //});
+
+    $('#nextBtn').on('click', function (e) {
+        e.preventDefault();
+        //let t = parseInt($('#drug td')[drug].getAttribute('value'));
+        //let res = parseInt($('#vaccine td')[vaccine].getAttribute('value'));
+        let t = parseInt($('#drug-treatment')[0].getAttribute('value'));
+        let res = 0;
+        let score = $('#score').val();
+        $('#score').val(parseInt(score) + t + res);
+        next();
+    })
+
+    function next() {
+        let countryName = $('#countries-input').val();
+        let agentName = $('#agents-input').val();
+
+        $.ajax({
+            url: '/Survey/BioClinical',
+            type: 'post',
+            data: { countryName: countryName, agentName: agentName },
+            error: function (xhr) {
+                console.log('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText);
+            },
+            success: function (response) {
+                user = response;
+                $('#survey').html(response);
+            }
+        });
+    }
+</script>

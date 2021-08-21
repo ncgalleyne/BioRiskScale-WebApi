@@ -1,0 +1,12 @@
+﻿@model WebApplication1.ViewModels.SurveyVM
+<div class="input-group">
+    <span class="glyphicon glyphicon-globe input-group-addon" id="basic-addon1"></span>
+    <input class="form-control" id="location" list="countries" placeholder="Geographic Location" aria-label="Location" aria-describedby="basic-addon1" enterkeyhint="next">
+</div>
+
+<datalist class="custom-select" id="countries">
+    @foreach (var country in Model.Countries)
+    {
+        <option value="@country.Name"></option>
+    }
+</datalist>

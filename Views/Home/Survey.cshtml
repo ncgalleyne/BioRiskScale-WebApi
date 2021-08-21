@@ -1,0 +1,251 @@
+﻿@model WebApplication1.ViewModels.SurveyVM
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" integrity="sha512-6S2HWzVFxruDlZxI3sXOZZ4/eJ8AcxkQH1+JjSe/ONCEqR9L4Ysq5JdT5ipqtzU7WHalNwzwBv+iE51gNHJNqQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="~/Content/table.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<section style="margin-top: 10px" id="header">
+    @*<p>
+        welcome to the biorisk survey, here are the overall <a>goals</a> of what this survey tries to accomplish. <a>here's</a> what you'll do and
+        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#helpModal">How</button> you do it . <h3>for best eval, we recommend you <a>create an account</a></h3>*@
+    <p>
+        Please click
+        <button style="outline: 1px solid red" class="btn" id="surveyBtn" @*data-toggle="modal" data-target="#surveyModal"*@>here</button> to continue into the survey
+    </p>
+
+</section>
+
+<section @*style="display:none"*@ id="survey-section" class="section">
+
+    <div id="score-div" style="display:none;border-radius: 8px;">
+        @*<label for="#score">score: </label>
+            <input class="hidden" disabled value="0" type="number" id="score" />*@
+        <input style="display:none" id="country_name" type="text" />
+        <input style="display:none" id="agent_name" type="text" />
+    </div>
+    <div class="row">
+        <div id="survey">
+
+        </div>
+
+    </div>
+
+</section>
+
+<!--Survey Modal -->
+<div class="modal fade" id="surveyModal" tabindex="-1" role="dialog" aria-labelledby="surveyModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="surveyModalLabel">Refine search criteria</h3>
+                <div class="input-group mb-3">
+                    @Html.Partial("_Countries", Model)
+                </div>
+                <div class="input-group mb-3">
+                    @Html.Partial("_Agent", Model)
+                </div>
+                <div style="margin: 10px">
+                    <button type="button" id="closeBtn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="proceedBtn" class="btn btn-primary">Proceed</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Loading Modal -->
+<div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <button class="btn btn-lg"><span class="glyphicon glyphicon-refresh spinning"></span> Loading...</button>
+        </div>
+    </div>
+</div>
+
+<!--How to Modal -->
+<div class="modal fade" id="helpModal" tabindex="-1" role="dialog" aria-labelledby="helpModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div style="display:block;background-color:white" class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="helpModalLabel">How to use biorisk survey:</h3>
+                <p>
+                    Based on your geographic location, we have pre-populated data provided by the Global Health Index.
+                </p>
+                <p>
+                    This is our only recomendation, but should you want to choose a different variable (highly unrecommended),
+                    please visit the following <a>websites and sources</a> for more information.
+                </p>
+
+                <p>
+                    To start, select your country.
+                    Based on your answer, we pre-populate data for categories that are dependent on your geographic location. While we do not recommend changing your answers from these pre-populated selections, we have built the survey to allow you to do so, should you so choose.
+                </p>
+
+                <p>
+                    Then, select your desired agent.
+                    Certain characteristics of biological agents do not change based on the other factors considered in this survey, so we pre-populate data for those categories. While we do not recommend changing your answers from these pre-populated selections, we have built the survey to allow you to do so, should you so choose.
+                </p>
+
+                <p>
+                    With each new page, your selections will be saved and locked in. If you would like to change the agent you’re evaluating, refresh the page to restart the survey.
+                </p>
+
+                <p>
+                    At the end of the survey, we will provide an overview of your biorisk, highlighting particular categories that contributed to your results.
+                    If you have a user profile, you will be able to return to your survey later once you have completed it. You will also be able to edit your selections.
+                </p>
+
+                <p>
+                    For more information on how we developed these metrics, please click <a target="_blank" href="/Survey/Citations">here</a>
+                </p>
+                <p>
+                    below is a key to show symbols used and their meaning
+                </p>
+            </div>
+            <div style="display:flex;justify-content:center" class="modal-body">
+                <img style="margin: 10px" src="https://lh3.googleusercontent.com/ACFls7XuJQ9EBj1NBhMo8z2wITGuHKnBKEny7yj1B_yZ1g0VRNvJBhU0FnlpTGulnfH8f9uk4GtPvZsIfmFF67jJMENhUKmXTfnrfd5CaxXIYBr5E9FFBCa4B5TMG7tik6WLdf1hSpmOODNwZCiobco97t5wvNl_TTCj6BYm7VVXGda_IlNNDSj5W-F1IW1tGap6pWjuPqL-WeGHEf5NcazG_CJ1Myh69FJIzoFQCPSzUd3dCU2Wsnexg3_tLx0fJGL81DihDz57L0dnLX35hAQbAfE65Ua4WmPGZD4qZYA1wtoQaCeh2taqdrcIoofHsoYbBhqHIM9U43JNxuwsu0bC5DvgBHiDG-4snSMFfy2iwU94sftw9ucfkUpNnyqs1HmIcXH3DAWCKRq7xCQnUllHArIFMtRtzHDj4E9gMUtbXGWsTYWpAbAA_La78gCilD1_AN5sCeg_zr5ObFc7Ilnpc5vWQ2-ShSydXx5pxlGp--vRRxAiLO3gd7C1HgHsEg5aH-Bfg5jazZKQ0jpMYcMHVPA4EyEOIwmTCV_HoVjyIKUKJD7Yn-2Ca6eAeF1MooOmzBD_97aVvxldmNdiM5fABs9FoAhO9EEqf7gkgGMiNg3h1KFcxuvxRWXV2I-dn2AM6LM7R77hEFPQF9tZTnxZWaQPY3DpaWvfhpDjEHwIJpTsAVwgnxLVNecZuIeOG5FvNfjMoBtK2d_ElEeK2qHJ=w352-h224-no?authuser=0" />
+            </div>
+            <div class="modal-footer">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--User Modal -->
+<div class="modal fade" id="userModal" tabindex="-1" role="dialog" aria-labelledby="userModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="loginModalLabel">Hi, @User.Identity.Name</h3>
+                <div style="margin: 10px">
+                    <div class="row"><a href="/Home/Profiles/@User.Identity.Name" id="profilesLink">Go To Profile</a></div>
+                    <div class="row">
+                        <button id="logoutBtn" class="btn btn-info "><span class="glyphicon glyphicon-log-out"></span>LogOut</button>
+                        <button type="button" id="closeBtn" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Welcome Modal -->
+<div class="modal fade" id="welcomeModal" tabindex="-1" role="dialog" aria-labelledby="welcomeModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3> Welcome to the BioRisk Survey</h3>
+                <p>
+                    Here are the overall <a>goals</a> of what this survey tries to accomplish. <a>Here's</a> what you'll do and
+                    <button id="helpBtn" type="button" class="btn btn-info" @*data-toggle="modal" data-target="#helpModal"*@>How</button> you do it .
+                </p>
+                <p>(for best eval, we recommend you <a id="registerLink">create an account</a>)</p>
+                @*<p>
+                        Please click
+                        <button style="outline: 1px solid red" class="btn" id="surveyBtn" data-toggle="modal" data-target="#surveyModal">here</button> to continue into the survey
+                    </p>*@
+                <div style="margin: 10px">
+                    <button type="button" id="closeBtn" class="btn btn-secondary pull-right" data-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<section id="footnotes"></section>
+
+<script>
+    $(document).ready(function () {
+        $('#welcomeModal').modal();
+
+        $('#surveyBtn').click(function () {
+            $('#surveyModal').modal();
+        });
+
+        $('#helpBtn').click(function () {
+            $('#welcomeModal').modal('hide');
+            $('#helpModal').modal();
+        });
+
+        $('#registerLink').click(function (e) {
+            $('#welcomeModal').modal('hide');
+            $('#accountModal').modal();
+        });
+
+        //$('#profilesLink').click(function () {
+        //    window.location.href = "/Home/Profiles/" + sessionStorage.getItem('userName');
+
+
+        //});
+        var user;
+
+        
+
+        $('#proceedBtn').click(function () {
+            let countryName = $('#countries-input').val();
+            let agentName = $('#agents-input').val();
+            $('#country_name').val(countryName);
+            $('#agent_name').val(agentName);
+
+            //loading animation
+            $('#surveyModal').modal('hide');
+            $('#loadingModal').modal();
+
+            $.ajax({
+                url: '/Survey/Index',
+                type: 'post',
+                data: { countryName: countryName, agentName: agentName },
+                error: function (xhr) {
+                    $('#loadingModal').modal('hide');
+                    console.log('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText);
+                },
+                success: function (response) {
+                    // launch survey
+                    $('#loadingModal').modal('hide');
+                    $('#header').addClass('hidden');
+                    $('#survey-start').hide();
+                    $('#survey').html(response);
+                    $('#survey-section').show();
+                    $('#score-div').show();
+                }
+            });
+        })
+
+
+    });
+</script>
+<script>
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-center",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "2500",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+</script>
+
+<script>
+    $(".panel-heading").parent('.panel').hover(
+        function () {
+            $(this).children('.collapse').collapse('show');
+        }, function () {
+            $(this).children('.collapse').collapse('hide');
+        }
+    );
+</script>

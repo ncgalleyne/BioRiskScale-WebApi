@@ -1,0 +1,125 @@
+﻿@model WebApplication1.ViewModels.ResevoirHostRegionVM
+<h1> <span style="padding-left: 10px; padding-right: 10px"> More Finalized Metrics</span></h1>
+<div style="overflow-x:auto">
+    <table id="resevoir-types">
+        <tr>
+            <th>Resevoir Types</th>
+        </tr>
+        <tr>
+            @foreach (var type in Model.ResevoirTypes)
+            {
+                if (Model.Metrics.ResevoirType.Host == type.Host)
+                {
+                    <td id="res-type" style="background-color: #fff877;" value="@type.Host">@type.Name</td>
+                }
+                else
+                {
+                    <td style="background-color: #f5f5f5;" value="@type.Host">@type.Name</td>
+                }
+            }
+        </tr>
+    </table>
+</div>
+<div style="overflow-x:auto">
+    <table id="resevoir-endemicities">
+        <tr>
+            <th>Resevoir Endemicities</th>
+        </tr>
+        <tr>
+            @foreach (var type in Model.ResevoirEndemicities)
+            {
+                if (Model.Metrics.ResevoirEndemicity.Host == type.Host)
+                {
+                    <td id="res-end" style="background-color: #fff877;" value="@type.Host">@type.Name</td>
+                }
+                else
+                {
+                    <td style="background-color: #f5f5f5;" value="@type.Host">@type.Name</td>
+                }
+            }
+        </tr>
+    </table>
+</div>
+
+<div style="overflow-x:auto">
+    <table id="host-endimicities">
+        <tr>
+            <th>Host Endemicities</th>
+        </tr>
+        <tr>
+            @foreach (var type in Model.HostEndemicities)
+            {
+                if (Model.Metrics.HostEndemicity.Host == type.Host)
+                {
+                    <td id="host" style="background-color: #fff877;" value="@type.Host">@type.Name</td>
+                }
+                else
+                {
+                    <td style="background-color: #f5f5f5;" value="@type.Host">@type.Name</td>
+                }
+            }
+        </tr>
+    </table>
+</div>
+
+
+<input id="resetBtn" type="reset" value="reset" />
+<input id="nextBtn" type="submit" value="next" />
+
+<script>
+
+
+    let res_types = 0, res_end = 0, host_end = 0;
+
+    //$('#resevoir-types td').on('click', function () {
+    //    $('#resevoir-types td')[res_types].style.backgroundColor = 'white';
+    //    let index = $(this).index();
+    //    $('#resevoir-types td')[index].style.backgroundColor = '#fff877';
+    //    res_types = index;
+    //});
+
+    //$('#resevoir-endemicities td').on('click', function () {
+    //    $('#resevoir-endemicities td')[res_end].style.backgroundColor = 'white';
+    //    let index = $(this).index();
+    //    $('#resevoir-endemicities td')[index].style.backgroundColor = '#fff877';
+    //    res_end = index;
+    //});
+
+    //$('#host-endimicities td').on('click', function () {
+    //    console.log('hmm');
+    //    $('#host-endimicities td')[host_end].style.backgroundColor = 'white';
+    //    let index = $(this).index();
+    //    $('#host-endimicities td')[index].style.backgroundColor = '#fff877';
+    //    host_end = index;
+    //});
+
+    $('#nextBtn').on('click', function (e) {
+        e.preventDefault();
+        //let t = parseInt($('#resevoir-types td')[res_types].getAttribute('value'));
+        //let res = parseInt($('#resevoir-endemicities td')[res_end].getAttribute('value'));
+        //let h = parseInt($('#host-endimicities td')[host_end].getAttribute('value'));
+        let t = 0; /*parseInt($('#res-type')[0].getAttribute('value'));*/
+        let res = parseInt($('#res-end')[0].getAttribute('value'));
+        let h = parseInt($('#host')[0].getAttribute('value'));
+        $('#score').val(t + res + h);
+        next();
+    })
+
+    function next() {
+        let countryName = $('#countries-input').val();
+        let agentName = $('#agents-input').val();
+
+        $.ajax({
+            url: '/Survey/Transmission',
+            type: 'post',
+            data: { countryName: countryName, agentName: agentName },
+            error: function (xhr) {
+                console.log('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText);
+            },
+            success: function (response) {
+                user = response;
+                $('#survey').html(response);
+            }
+        });
+    }
+</script>

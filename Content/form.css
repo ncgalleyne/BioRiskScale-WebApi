@@ -1,0 +1,66 @@
+﻿html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Verdana, cursive;
+    font-size: 13pt;
+    background-color: #efefef;
+    padding: 10px;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+h1 {
+    font-size: 15pt;
+    color: #20bcd5;
+    text-align: center;
+    padding: 18px 0 18px 0;
+    margin: 0 0 10px 0;
+}
+
+    h1 span {
+        border: 4px dashed #20bcd5;
+    }
+
+p {
+    padding: 0;
+    margin: 0;
+}
+
+.section {
+    background-color: #fff;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.submit {
+    background-color: #3fb6b2;
+    padding: 12px 45px;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #ffffff;
+    border: none;
+    outline: none;
+    font-weight: bold;
+}
+
+#submitBtn {
+    margin-left: 48%;
+}
+
+.submit:hover {
+    background-color: #43a09d;
+}
+
+textarea {
+    height: 100px;
+}
+
+form {
+    padding: 15px 40px;
+    width: max-content;
+}

@@ -1,0 +1,379 @@
+﻿@model WebApplication1.ViewModels.PyschVM
+<h1> <span style="padding-left: 10px; padding-right: 10px">Psych</span></h1>
+
+<div class="progress">
+    <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="98" aria-valuemin="0" aria-valuemax="100" style="width: 98%">
+        <span class="sr-only">77% ( 17 answered / 22 total )</span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-9">
+        <div style="overflow-x: auto">
+            <table id="history">
+                <tr>
+                    <th colspan="10">
+                        History<span tabindex="0" data-toggle="tooltip" title="This metric is pre-filled based on your geographic location" class="d-inline-block glyphicon glyphicon-info-sign"></span>
+                               <p>@Model.Metrics.History.Description</p>
+                    </th>
+                </tr>
+                <tr>
+                    @foreach (var type in Model.History)
+                    {
+                        if (Model.Recs.History.Host == type.Host)
+                        {
+                            <td id="hist" style="border: 4px dashed #286090;background-color: #fff877; " value="@type.Host">@type.Name</td>
+                        }
+                        else
+                        {
+                            <td style="background-color: white;" value="@type.Host">@type.Name</td>
+                        }
+                    }
+                </tr>
+            </table>
+        </div>
+
+        <div style="overflow-x: auto">
+            <table id="awareness">
+                <tr>
+                    <th colspan="10">
+                        Public Awareness<span data-toggle="tooltip" title="required">*</span>
+                        <p>()</p>
+                    </th>
+                </tr>
+                <tr>
+                    @foreach (var type in Model.PublicAwarenesses)
+                    {
+                        <td value="@type.Host">@type.Name</td>
+                    }
+                </tr>
+            </table>
+        </div>
+
+        <div style="overflow-x: auto">
+            <table id="fear">
+                <tr>
+                    <th colspan="10">Symptom Induced Fear<span data-toggle="tooltip" title="required">*</span></th>
+                </tr>
+                <tr>
+                    @foreach (var type in Model.SymptomInducedFears)
+                    {
+                        <td value="@type.Host">@type.Name</td>
+                    }
+                </tr>
+            </table>
+        </div>
+
+        <div style="overflow-x: auto">
+            <table id="relatives">
+                <tr>
+                    <th colspan="10">
+                        Uncertainty of Agent Relatives<span tabindex="0" data-toggle="tooltip" title="This metric is pre-filled based on your geographic location" class="d-inline-block glyphicon glyphicon-info-sign"></span>
+                        <p>@Model.Metrics.Agent_Relatives.Description</p>
+                    </th>
+                </tr>
+                <tr>
+                    @foreach (var type in Model.AgentRelatives)
+                    {
+                        if (Model.Recs.Agent_Relatives.Host == type.Host)
+                        {
+                            <td id="agent-rel" style="border: 4px dashed #286090;background-color: #fff877; " value="@type.Host">@type.Name</td>
+                        }
+                        else
+                        {
+                            <td style="background-color: white;" value="@type.Host">@type.Name</td>
+                        }
+                    }
+                </tr>
+            </table>
+        </div>
+
+        <div style="overflow-x: auto">
+            <table id="species">
+                <tr>
+                    <th colspan="10">
+                        Uncertainty of Agent Species<span tabindex="0" data-toggle="tooltip" title="This metric is pre-filled based on your geographic location" class="d-inline-block glyphicon glyphicon-info-sign"></span>
+                        <p>@Model.Metrics.AgentSpecies.Description</p>
+                    </th>
+                </tr>
+                <tr>
+                    @foreach (var type in Model.AgentSpecies)
+                    {
+                        if (Model.Recs.AgentSpecies.Host == type.Host)
+                        {
+                            <td id="agent-species" style="border: 4px dashed #286090;background-color: #fff877; " value="@type.Host">@type.Name</td>
+                        }
+                        else
+                        {
+                            <td style="background-color: white;" value="@type.Host">@type.Name</td>
+                        }
+                    }
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <div style="margin-top: 10px;" class="panel-group col-md-3" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div style="background-color:antiquewhite" class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a style="text-decoration: none" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        For more information on how we determined these metrics
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div style="overflow-x:auto" class="panel-body">
+                    <table>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Info</th>
+                        </tr>
+                        <tr>
+                            <td>@Model.Metrics.History.Name</td>
+                            @{
+                                var count = 1;
+                                foreach (var item in Model.Metrics.History.MetricSources)
+                                {
+                                    <td>
+                                        <a target="_blank" href="@item.MetricLink">@count@*@item.MetricLabel*@</a>
+                                    </td>
+                                    count++;
+                                }
+
+                                foreach (var item in Model.Metrics.History.AgentSources)
+                                {
+                                    <td>
+                                        <a target="_blank" href="@item.AgentLink">@count@*@item.AgentLabel*@</a>
+                                    </td>
+                                    count++;
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            <td>@*@Model.Metrics.DrugTreatment.Name*@</td>
+                            <td>@*@Model.Metrics.DrugTreatment.Sources*@</td>
+                        </tr>
+                        <tr>
+                            <td>@*@Model.Metrics.DrugTreatment.Name*@</td>
+                            <td>@*@Model.Metrics.DrugTreatment.Sources*@</td>
+                        </tr>
+                        <tr>
+                            <td>@Model.Metrics.AgentSpecies.Name</td>
+                            @{
+                                count = 1;
+                                foreach (var item in Model.Metrics.AgentSpecies.MetricSources)
+                                {
+                                    <td>
+                                        <a target="_blank" href="@item.MetricLink">@count@*@item.MetricLabel*@</a>
+                                    </td>
+                                    count++;
+                                }
+
+                                foreach (var item in Model.Metrics.AgentSpecies.AgentSources)
+                                {
+                                    <td>
+                                        <a target="_blank" href="@item.AgentLink">@count@*@item.AgentLabel*@</a>
+                                    </td>
+                                    count++;
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            <td>@Model.Metrics.Agent_Relatives.Name</td>
+                            @*<td>@Model.Metrics.Agent_Relatives.MetricSource</td>
+                            @foreach (var item in Model.Metrics.Agent_Relatives.AgentSources)
+                            {
+                                <td>@item</td>
+                            }*@
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<input id="nextBtn" type="submit" value="submit" />
+
+<script>
+    let history = ($('#history td#hist').index() == -1) ? -1 : $('#history td#hist').index(),
+        awareness = -1,
+        fear = -1,
+        relatives = ($('#relatives td#agent-rel').index() == -1) ? -1 : $('#relatives td#agent-rel').index(),
+        species = ($('#species td#agent-species').index() == -1) ? -1 : $('#species td#agent-species').index()
+
+    $('td').on('mouseenter', function () {
+        if ($(this)[0].style.backgroundColor != 'rgb(255, 248, 119)')
+            $(this)[0].style.backgroundColor = '#f5f5f5';
+    })
+
+    $('td').on('mouseleave', function () {
+        if ($(this)[0].style.backgroundColor != 'rgb(255, 248, 119)')
+            $(this)[0].style.backgroundColor = 'white';
+    })
+
+    // Change input value on label click
+    $('#history td').on('click', function () {
+        $('#history th')[0].style.border = 'none';
+        if (history == -1)
+            history = 0;
+        $('#history td')[history].style.backgroundColor = 'white';
+        let index = $(this).index();
+        $('#history td')[index].style.backgroundColor = '#fff877';
+        history = index;
+    });
+
+    $('#awareness td').on('click', function () {
+        $('#awareness th')[0].style.border = 'none';
+        if (awareness == -1)
+            awareness = 0;
+        $('#awareness td')[awareness].style.backgroundColor = 'white';
+        let index = $(this).index();
+        $('#awareness td')[index].style.backgroundColor = '#fff877';
+        awareness = index;
+    });
+
+    $('#fear td').on('click', function () {
+        $('#fear th')[0].style.border = 'none';
+        if (fear == -1)
+            fear = 0;
+        $('#fear td')[fear].style.backgroundColor = 'white';
+        let index = $(this).index();
+        $('#fear td')[index].style.backgroundColor = '#fff877';
+        fear = index;
+    });
+
+    $('#species td').on('click', function () {
+        $('#species th')[0].style.border = 'none';
+        if (species == -1)
+            species = 0;
+        $('#species td')[species].style.backgroundColor = 'white';
+        let index = $(this).index();
+        $('#species td')[index].style.backgroundColor = '#fff877';
+        species = index;
+    });
+
+    $('#relatives td').on('click', function () {
+        $('#relatives th')[0].style.border = 'none';
+        if (relatives == -1)
+            relatives = 0;
+        $('#relatives td')[relatives].style.backgroundColor = 'white';
+        let index = $(this).index();
+        $('#relatives td')[index].style.backgroundColor = '#fff877';
+        relatives = index;
+    });
+
+    $('#nextBtn').on('click', function (e) {
+        e.preventDefault();
+
+        if (!validateAnswers()) {
+            alert('please fill out all remaining fields');
+            return;
+        }
+
+        let a = parseInt($('#awareness td')[awareness].getAttribute('value'));
+        let res = parseInt($('#fear td')[fear].getAttribute('value'));
+        let t = parseInt($('#history td')[history].getAttribute('value'));
+        let o = parseInt($('#relatives td')[relatives].getAttribute('value'));
+        let c = parseInt($('#species td')[species].getAttribute('value'));
+
+        sessionStorage.awareness = a;
+        sessionStorage.fear = res;
+        sessionStorage.history = t;
+        sessionStorage.agent_relatives = o;
+        sessionStorage.agent_species = c;
+
+        submit();
+
+    })
+
+    function validateAnswers() {
+        //checking if indices are -1, meaning they never got clicked
+        let validated = true;
+        if (history == -1) {
+            $('#history th')[0].style.border = '2px groove red'
+            validated = false;
+        }
+        if (awareness == -1) {
+            $('#awareness th')[0].style.border = '2px groove red'
+            validated = false;
+        }
+        if (fear == -1) {
+            $('#fear th')[0].style.border = '2px groove red'
+            validated = false;
+        }
+        if (relatives == -1) {
+            $('#relatives th')[0].style.border = '2px groove red'
+            validated = false;
+        }
+        if (species == -1) {
+            $('#species th')[0].style.border = '2px groove red'
+            validated = false;
+        }
+        return validated;
+    }
+
+    function submit() {
+        //get user id from localstorage
+        let userId = sessionStorage.getItem('userId');
+        //send all sessionstorage to database
+        let arr = [];
+        let keys = Object.keys(sessionStorage);
+        for (let key of keys) {
+            arr[key] = parseInt(sessionStorage.getItem(key));
+        }
+        arr["userId"] = parseInt(userId);
+        $.ajax({
+            url: '/Survey/AddSurveyResults/',
+            type: 'post',
+            dataType: "json",
+            success: function () {
+                alert('success');
+            },
+            error: function (xhr) {
+                console.log('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText);
+                window.location.href = "/Survey/Results/?uid=" + userId;
+            },
+            data: {
+                agent_relatives: arr["agent_relatives"],
+                agent_species: arr["agent_species"],
+                awareness: arr["awareness"],
+                cfr: arr["cfr"],
+                compliance: arr["compliance"],
+                contacts: arr["contacts"],
+                detection: arr["detection"],
+                drug_treatment: arr["drug_treatment"],
+                environment: arr["environment"],
+                fear: arr["fear"],
+                generation: arr["generation"],
+                history: arr["history"],
+                host_type: arr["host_type"],
+                ifr: arr["ifr"],
+                immunity: arr["immunity"],
+                modes: arr["modes"],
+                overlap: arr["overlap"],
+                persistance: arr["persistance"],
+                prevention: arr["prevention"],
+                reservoir_endimicity: arr["reservoir_endimicity"],
+                reservoir_type: arr["reservoir_type"],
+                response: arr["response"],
+                system: arr["system"],
+                userId: userId,
+                vaccine_treatment: arr["vaccine_treatment"]
+            }
+        });
+        
+    }
+
+</script>
+
+<script>
+    $(".panel-heading").parent('.panel').hover(
+        function () {
+            $(this).children('.collapse').collapse('show');
+        }, function () {
+            $(this).children('.collapse').collapse('hide');
+        }
+    );
+</script>

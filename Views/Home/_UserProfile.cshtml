@@ -1,0 +1,74 @@
+﻿
+<div class="row">
+    <label>First Name</label>
+    <input class="form-control" id="firstName" type="text" value="@Model.AccountUser.FirstName" disabled />
+    @*@Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })*@
+
+    <label>Last Name</label>
+    <input class="form-control" id="lastName" type="text" value="@Model.AccountUser.LastName" disabled />
+
+    <label>Email</label>
+    <input class="form-control" id="email" type="text" value="@Model.AccountUser.Email" disabled />
+
+    <label>Occupation</label>
+    <input class="form-control" id="occupation" type="text" value="@Model.AccountUser.Occupation" disabled />
+
+    <label>Location</label>
+    <input class="form-control" id="location" type="text" value="@Model.AccountUser.Location" disabled />
+</div>
+<div class="row" style="margin-top: 10px">
+    <button class="btn-primary" id="editBtn">Edit</button>
+    <button class="btn-success hidden" id="saveBtn">Save Changes</button>
+</div>
+    
+
+
+<script>
+    $('#editBtn').click(function () {
+        $('input').prop('disabled', false);
+        $('#saveBtn').removeClass('hidden');
+    });
+
+    $('#saveBtn').click(function () {
+        //first send the changges down
+        $.ajax({
+            url: '/Home/UpdateUserCredentials',
+            type: 'post',
+            data: {
+                id: sessionStorage.userId, 
+                fName: $('#firstName').val(),
+                lName: $('#lastName').val(),
+                email: $('#email').val(),
+                location: $('#location').val(),
+                occupation: $('#occupation').val()
+            },
+            success: function () {
+                toastr["success"]("Data updated successfully", "Success");
+            }
+        });
+
+        $('input').prop('disabled', true);
+        $('#saveBtn').addClass('hidden');
+    });
+
+</script>
+
+<script>
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-center",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "2500",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+</script>

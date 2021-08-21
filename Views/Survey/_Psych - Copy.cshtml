@@ -1,0 +1,145 @@
+﻿@model WebApplication1.ViewModels.PyschVM
+<h1> <span style="padding-left: 10px; padding-right: 10px"> More Finalized Metrics</span></h1>
+<div style="overflow-x: auto">
+    <table id="history">
+        <tr>
+            <th>History</th>
+        </tr>
+        <tr>
+            @foreach (var type in Model.History)
+            {
+                if (Model.Metrics.History.Host == type.Host)
+                {
+                    <td id="hist" style="background-color: #fff877;" value="@type.Host">@type.Name</td>
+                }
+                else
+                {
+                    <td style="background-color: #f5f5f5;" value="@type.Host">@type.Name</td>
+                }
+            }
+        </tr>
+    </table>
+</div>
+
+<div style="overflow-x: auto">
+    <table id="awareness">
+        <tr>
+            <th>Public Awareness</th>
+        </tr>
+        <tr>
+            @foreach (var type in Model.PublicAwarenesses)
+            {
+                <td value="@type.Host">@type.Name</td>
+            }
+        </tr>
+    </table>
+</div>
+
+<div style="overflow-x: auto">
+    <table id="fear">
+        <tr>
+            <th>Symptom Induced Fear</th>
+        </tr>
+        <tr>
+            @foreach (var type in Model.SymptomInducedFears)
+            {
+                <td value="@type.Host">@type.Name</td>
+            }
+        </tr>
+    </table>
+</div>
+
+<div style="overflow-x: auto">
+    <table id="relatives">
+        <tr>
+            <th>Uncertainty of Agent Relatives</th>
+        </tr>
+        <tr>
+            @foreach (var type in Model.AgentRelatives)
+            {
+                if (Model.Metrics.Agent_Relatives.Host == type.Host)
+                {
+                    <td id="agent-rel" style="background-color: #fff877;" value="@type.Host">@type.Name</td>
+                }
+                else
+                {
+                    <td style="background-color: #f5f5f5;" value="@type.Host">@type.Name</td>
+                }
+            }
+        </tr>
+    </table>
+</div>
+
+<div style="overflow-x: auto">
+    <table id="species">
+        <tr>
+            <th>Uncertainty of Agent Species</th>
+        </tr>
+        <tr>
+            @foreach (var type in Model.AgentSpecies)
+            {
+                if (Model.Metrics.AgentSpecies.Host == type.Host)
+                {
+                    <td id="agent-species" style="background-color: #fff877;" value="@type.Host">@type.Name</td>
+                }
+                else
+                {
+                    <td style="background-color: #f5f5f5;" value="@type.Host">@type.Name</td>
+                }
+            }
+        </tr>
+    </table>
+</div>
+
+<script>
+    let history = 0, awareness = 0, fear = 0, relatives = 0, species = 0;
+
+    // Change input value on label click
+    //$('#history td').on('click', function () {
+    //    $('#history td')[history].style.backgroundColor = 'white';
+    //    let index = $(this).index();
+    //    $('#history td')[index].style.backgroundColor = '#fff877';
+    //    history = index;
+    //});
+
+    $('#awareness td').on('click', function () {
+        $('#awareness td')[awareness].style.backgroundColor = 'white';
+        let index = $(this).index();
+        $('#awareness td')[index].style.backgroundColor = '#fff877';
+        awareness = index;
+    });
+
+    $('#fear td').on('click', function () {
+        $('#fear td')[fear].style.backgroundColor = 'white';
+        let index = $(this).index();
+        $('#fear td')[index].style.backgroundColor = '#fff877';
+        fear = index;
+    });
+
+    //$('#species td').on('click', function () {
+    //    $('#species td')[species].style.backgroundColor = 'white';
+    //    let index = $(this).index();
+    //    $('#species td')[index].style.backgroundColor = '#fff877';
+    //    species = index;
+    //});
+
+    //$('#relatives td').on('click', function () {
+    //    $('#relatives td')[relatives].style.backgroundColor = 'white';
+    //    let index = $(this).index();
+    //    $('#relatives td')[index].style.backgroundColor = '#fff877';
+    //    relatives = index;
+    //});
+
+    $('#nextBtn').on('click', function (e) {
+        e.preventDefault();
+        //let t = parseInt($('#history td')[history].getAttribute('value'));
+        let a = parseInt($('#awareness td')[awareness].getAttribute('value'));
+        let res = parseInt($('#fear td')[fear].getAttribute('value'));
+        //let o = parseInt($('#species td')[species].getAttribute('value'));
+        //let c = parseInt($('#relatives td')[relatives].getAttribute('value'));
+        let t = parseInt($('#hist')[0].getAttribute('value'));
+        let o = parseInt($('#agent-rel')[0].getAttribute('value'));
+        let c = parseInt($('#agent-species')[0].getAttribute('value'));
+        alert(t + a + res + o + c);
+    })
+</script>

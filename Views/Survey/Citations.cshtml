@@ -1,0 +1,46 @@
+﻿@model WebApplication1.ViewModels.SurveyVM
+@{
+    ViewBag.Title = "Citations";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Citations</title>
+</head>
+<body>
+    <div style="display:flex; justify-content:center" class="row">
+        <h1>Metric Citations</h1>
+    </div>
+    
+    <div style="overflow-x:auto">
+        @foreach (var m in Model.Metrics.MetricObjs)
+        {
+            if (m.MetricSources.Count() > 0 || m.AgentSources.Count() > 0)
+            {
+                <label><b>@m.MetricName</b></label>
+                <ul>
+                    @foreach (var item in m.MetricSources)
+                    {
+                        <li>
+                            <a target="_blank" href="@item.MetricLink">@item.MetricLabel</a>
+                            <p>- @item.MetricCitation</p>
+                        </li>
+                    }
+                    @foreach (var item in m.AgentSources)
+                    {
+                        <li>
+                            <a target="_blank" href="@item.AgentLink">@item.AgentLabel</a>
+                            <p>- @item.AgentCitation</p>
+                        </li>
+                    }
+                </ul>
+            }
+
+        }
+    </div>
+</body>
+</html>

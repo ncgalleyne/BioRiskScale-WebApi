@@ -1,0 +1,91 @@
+﻿@model WebApplication1.ViewModels.SurveyVM
+@{
+    ViewBag.Title = "Profile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" integrity="sha512-6S2HWzVFxruDlZxI3sXOZZ4/eJ8AcxkQH1+JjSe/ONCEqR9L4Ysq5JdT5ipqtzU7WHalNwzwBv+iE51gNHJNqQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        @*Brand and toggle get grouped for better mobile display*@
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">BioRisk Survey</a>
+        </div>
+        @*Collect the nav links, forms, and other content for toggling*@
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            @{
+                if (!User.Identity.IsAuthenticated)
+                {
+
+                    <ul id="accountBtns" class="nav navbar-nav">
+                        <li>
+                            <button type="button" class="btn" data-toggle="modal" data-target="#accountModal">Create an Account</button>
+                        </li>
+                        <li>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Login</button>
+                        </li>
+
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                }
+            }
+            @*<div id="userModalIcon" class="navbar-form navbar-right">
+                    <button type="button" class="btn btn-primary glyphicon glyphicon-user" data-toggle="modal" data-target="#userModal"></button>
+                </div>*@
+            @{
+                if (User.Identity.IsAuthenticated)
+                {
+                    <div id="userModalIcon" class="navbar-form navbar-right">
+                        <button type="button" class="btn btn-primary glyphicon glyphicon-user" data-toggle="modal" data-target="#userModal"></button>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+</nav>
+
+<h2>User Details</h2>
+
+<ul class="nav nav-pills">
+    <li class="nav-item">
+        <a class="nav-link active" data-toggle="pill" href="#info">Info</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="pill" href="#results">Survey Results</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-toggle="pill" href="#menu2">Menu 3</a>
+    </li>
+</ul>
+
+<!-- Tab panes -->
+<div class="tab-content">
+    <div class="tab-pane container active" id="info">@Html.Partial("_UserProfile", Model)</div>
+    <div style="overflow-x:auto" class="tab-pane container fade" id="results">@Html.Partial("_UserSurveyHistory", Model)</div>
+    <div class="tab-pane container fade" id="menu2">No content</div>
+</div>
+
+<div class="row">
+    <div class="">
+        
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+    });
+</script>

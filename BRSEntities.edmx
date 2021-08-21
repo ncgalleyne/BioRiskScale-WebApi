@@ -1,0 +1,1121 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Bio_Risk_ScaleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Bio_Risk_Scale.dbo._Geography' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="_Geography">
+          <Key>
+            <PropertyRef Name="Country_Name" />
+            <PropertyRef Name="Agent" />
+            <PropertyRef Name="Case_Fatality_Ratio" />
+            <PropertyRef Name="Contact_Rate" />
+            <PropertyRef Name="Degree_of_contact" />
+            <PropertyRef Name="Duration_of_immunity" />
+            <PropertyRef Name="Environmental_persistance" />
+            <PropertyRef Name="Vaccine_Treatment" />
+            <PropertyRef Name="Drug_treatment" />
+            <PropertyRef Name="Generation_time" />
+            <PropertyRef Name="History" />
+            <PropertyRef Name="IFR" />
+            <PropertyRef Name="Infection_illness_overlap" />
+            <PropertyRef Name="Number_of_possible_modes" />
+            <PropertyRef Name="Probability_of_Transmission" />
+            <PropertyRef Name="Uncertainty_of_Agent_Species" />
+            <PropertyRef Name="Uncertainty_of_Agent_Relatives" />
+            <PropertyRef Name="Host_Endemicity" />
+            <PropertyRef Name="Resevoir_Endemicity" />
+            <PropertyRef Name="Resevoir_Type" />
+          </Key>
+          <Property Name="Country_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Agent" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Case_Fatality_Ratio" Type="int" Nullable="false" />
+          <Property Name="Contact_Rate" Type="int" Nullable="false" />
+          <Property Name="Degree_of_contact" Type="int" Nullable="false" />
+          <Property Name="Duration_of_immunity" Type="int" Nullable="false" />
+          <Property Name="Environmental_persistance" Type="int" Nullable="false" />
+          <Property Name="Vaccine_Treatment" Type="int" Nullable="false" />
+          <Property Name="Drug_treatment" Type="int" Nullable="false" />
+          <Property Name="Generation_time" Type="int" Nullable="false" />
+          <Property Name="History" Type="int" Nullable="false" />
+          <Property Name="IFR" Type="int" Nullable="false" />
+          <Property Name="Infection_illness_overlap" Type="int" Nullable="false" />
+          <Property Name="Number_of_possible_modes" Type="int" Nullable="false" />
+          <Property Name="Probability_of_Transmission" Type="int" Nullable="false" />
+          <Property Name="Uncertainty_of_Agent_Species" Type="int" Nullable="false" />
+          <Property Name="Uncertainty_of_Agent_Relatives" Type="int" Nullable="false" />
+          <Property Name="Host_Endemicity" Type="int" Nullable="false" />
+          <Property Name="Resevoir_Endemicity" Type="int" Nullable="false" />
+          <Property Name="Resevoir_Type" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="_Location" Type="nvarchar" MaxLength="50" />
+          <Property Name="Occupation" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Bio_Risk_Scale.dbo.Bio_Clinical' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Bio_Clinical">
+          <Key>
+            <PropertyRef Name="Host" />
+            <PropertyRef Name="Generation_Time" />
+          </Key>
+          <Property Name="Host" Type="int" Nullable="false" />
+          <Property Name="Generation_Time" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Duration_Immunity" Type="nvarchar" MaxLength="50" />
+          <Property Name="CFR" Type="nvarchar" MaxLength="50" />
+          <Property Name="IFR" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Bio_Risk_Scale.dbo.Country_Codes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Country_Codes">
+          <Key>
+            <PropertyRef Name="Country_Name" />
+            <PropertyRef Name="Country_Id" />
+          </Key>
+          <Property Name="Country_Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Country_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Bio_Risk_Scale.dbo.Drugs_Vaccines' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Drugs_Vaccines">
+          <Key>
+            <PropertyRef Name="Host" />
+            <PropertyRef Name="Drug_treatment" />
+          </Key>
+          <Property Name="Host" Type="int" Nullable="false" />
+          <Property Name="Drug_treatment" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Vaccine_treatment" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Bio_Risk_Scale.dbo.GHSI' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="GHSI">
+          <Key>
+            <PropertyRef Name="Host" />
+            <PropertyRef Name="Prevention" />
+          </Key>
+          <Property Name="Host" Type="int" Nullable="false" />
+          <Property Name="Prevention" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Detection" Type="nvarchar" MaxLength="50" />
+          <Property Name="Rapid_Response" Type="nvarchar" MaxLength="50" />
+          <Property Name="Health_System" Type="nvarchar" MaxLength="50" />
+          <Property Name="Compliance" Type="nvarchar" MaxLength="50" />
+          <Property Name="Risk_Environment" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Metric_Info">
+          <Key>
+            <PropertyRef Name="Metric_Id" />
+          </Key>
+          <Property Name="Metric_Id" Type="int" Nullable="false" />
+          <Property Name="Metric_Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Metric_Description" Type="nvarchar(max)" />
+          <Property Name="Sources" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Bio_Risk_Scale.dbo.Metric_Sources' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Metric_Sources">
+          <Key>
+            <PropertyRef Name="Metric_Id" />
+          </Key>
+          <Property Name="Metric_Id" Type="int" Nullable="false" />
+          <Property Name="Metric_Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Metric_Source_Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Metric_Source_Link" Type="nvarchar" MaxLength="255" />
+          <Property Name="Metric_Citation" Type="nvarchar(max)" />
+          <Property Name="Agent_Source_Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Agent_Source_Link" Type="nvarchar" MaxLength="255" />
+          <Property Name="Agent_Citation" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Bio_Risk_Scale.dbo.Psych' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Psych">
+          <Key>
+            <PropertyRef Name="Host" />
+            <PropertyRef Name="History" />
+          </Key>
+          <Property Name="Host" Type="int" Nullable="false" />
+          <Property Name="History" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Public_Awareness" Type="nvarchar(max)" />
+          <Property Name="Symptom_induced_fear" Type="nvarchar(max)" />
+          <Property Name="Uncertainty_of_Agent_Species" Type="nvarchar" MaxLength="50" />
+          <Property Name="Uncertainty_of_Agent_Relatives" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Bio_Risk_Scale.dbo.Resevoir Host Region' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Resevoir Host Region">
+          <Key>
+            <PropertyRef Name="Host" />
+          </Key>
+          <Property Name="Resevoir Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Resevoir Endemicity" Type="nvarchar(max)" />
+          <Property Name="Host Endemicity" Type="nvarchar(max)" />
+          <Property Name="Host" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Bio_Risk_Scale.dbo.Survey_History' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Survey_History">
+          <Key>
+            <PropertyRef Name="Compliance" />
+            <PropertyRef Name="Resevoir_Type" />
+            <PropertyRef Name="Resevoir_Endemicity" />
+            <PropertyRef Name="Host_Endemicity" />
+            <PropertyRef Name="Degree_of_contact" />
+            <PropertyRef Name="Number_of_possible_modes" />
+            <PropertyRef Name="Environmental_persistance" />
+            <PropertyRef Name="Infection_illness_overlap" />
+            <PropertyRef Name="Drug_treatment" />
+            <PropertyRef Name="Vaccine_Treatment" />
+            <PropertyRef Name="Generation_time" />
+            <PropertyRef Name="Duration_of_immunity" />
+            <PropertyRef Name="CFR" />
+            <PropertyRef Name="IFR" />
+            <PropertyRef Name="History" />
+            <PropertyRef Name="Public_Awareness" />
+            <PropertyRef Name="Symptom_induced_fear" />
+            <PropertyRef Name="Uncertainty_of_Agent_Species" />
+            <PropertyRef Name="Uncertainty_of_Agent_Relatives" />
+            <PropertyRef Name="Detection" />
+            <PropertyRef Name="System" />
+            <PropertyRef Name="Environment" />
+            <PropertyRef Name="prevention" />
+            <PropertyRef Name="response" />
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="Compliance" Type="int" Nullable="false" />
+          <Property Name="Resevoir_Type" Type="int" Nullable="false" />
+          <Property Name="Resevoir_Endemicity" Type="int" Nullable="false" />
+          <Property Name="Host_Endemicity" Type="int" Nullable="false" />
+          <Property Name="Degree_of_contact" Type="int" Nullable="false" />
+          <Property Name="Number_of_possible_modes" Type="int" Nullable="false" />
+          <Property Name="Environmental_persistance" Type="int" Nullable="false" />
+          <Property Name="Infection_illness_overlap" Type="int" Nullable="false" />
+          <Property Name="Drug_treatment" Type="int" Nullable="false" />
+          <Property Name="Vaccine_Treatment" Type="int" Nullable="false" />
+          <Property Name="Generation_time" Type="int" Nullable="false" />
+          <Property Name="Duration_of_immunity" Type="int" Nullable="false" />
+          <Property Name="CFR" Type="int" Nullable="false" />
+          <Property Name="IFR" Type="int" Nullable="false" />
+          <Property Name="History" Type="int" Nullable="false" />
+          <Property Name="Public_Awareness" Type="int" Nullable="false" />
+          <Property Name="Symptom_induced_fear" Type="int" Nullable="false" />
+          <Property Name="Uncertainty_of_Agent_Species" Type="int" Nullable="false" />
+          <Property Name="Uncertainty_of_Agent_Relatives" Type="int" Nullable="false" />
+          <Property Name="Detection" Type="int" Nullable="false" />
+          <Property Name="System" Type="int" Nullable="false" />
+          <Property Name="Environment" Type="int" Nullable="false" />
+          <Property Name="prevention" Type="int" Nullable="false" />
+          <Property Name="response" Type="int" Nullable="false" />
+          <Property Name="user_id" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="_Date" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Bio_Risk_Scale.dbo.Testing_Pathogens' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Testing_Pathogens">
+          <Key>
+            <PropertyRef Name="Agent_Name" />
+            <PropertyRef Name="Resevoir_Type" />
+            <PropertyRef Name="Number_of_possible_modes" />
+            <PropertyRef Name="Generation_time" />
+          </Key>
+          <Property Name="Agent_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Resevoir_Type" Type="int" Nullable="false" />
+          <Property Name="Resevoir_Endemicity" Type="int" />
+          <Property Name="Host_Endemicity" Type="int" />
+          <Property Name="Contact_Rate" Type="int" />
+          <Property Name="Probability_of_Transmission" Type="int" />
+          <Property Name="Degree_of_contact" Type="int" />
+          <Property Name="Number_of_possible_modes" Type="int" Nullable="false" />
+          <Property Name="Environmental_persistance" Type="int" />
+          <Property Name="Infection_illness_overlap" Type="int" />
+          <Property Name="Drug_treatment" Type="int" />
+          <Property Name="Vaccine_Treatment" Type="int" />
+          <Property Name="Generation_time" Type="int" Nullable="false" />
+          <Property Name="Duration_of_immunity" Type="int" />
+          <Property Name="CFR" Type="int" />
+          <Property Name="IFR" Type="int" />
+          <Property Name="History" Type="int" />
+          <Property Name="Public_Awareness" Type="int" />
+          <Property Name="Symptom_induced_fear" Type="int" />
+          <Property Name="Uncertainty_of_Agent_Species" Type="int" />
+          <Property Name="Uncertainty_of_Agent_Relatives" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Bio_Risk_Scale.dbo.Transmission' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Transmission">
+          <Key>
+            <PropertyRef Name="Host" />
+          </Key>
+          <Property Name="Host" Type="int" Nullable="false" />
+          <Property Name="Degree_of_Contact" Type="nvarchar" MaxLength="50" />
+          <Property Name="Number_of_possible_modes" Type="nvarchar(max)" />
+          <Property Name="Environmental_Persistence" Type="nvarchar" MaxLength="50" />
+          <Property Name="Infectivity_Overlap" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Bio_Risk_Scale.dbo.User_Accounts' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="User_Accounts">
+          <Key>
+            <PropertyRef Name="User_Id" />
+            <PropertyRef Name="First_Name" />
+            <PropertyRef Name="Last_Name" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="_Password" />
+          </Key>
+          <Property Name="User_Id" Type="int" Nullable="false" />
+          <Property Name="First_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="_Password" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="_Location" Type="nvarchar" MaxLength="50" />
+          <Property Name="Occupation" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <Function Name="AddSurvey_Results" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Compliance" Type="int" Mode="In" />
+          <Parameter Name="Resevoir_Type" Type="int" Mode="In" />
+          <Parameter Name="Resevoir_End" Type="int" Mode="In" />
+          <Parameter Name="Host_End" Type="int" Mode="In" />
+          <Parameter Name="Degree_of_contact" Type="int" Mode="In" />
+          <Parameter Name="Number_of_possible_modes" Type="int" Mode="In" />
+          <Parameter Name="Environmental_persistance" Type="int" Mode="In" />
+          <Parameter Name="Infection_illness_overlap" Type="int" Mode="In" />
+          <Parameter Name="Drug_treatment" Type="int" Mode="In" />
+          <Parameter Name="Vaccine_Treatment" Type="int" Mode="In" />
+          <Parameter Name="Generation_time" Type="int" Mode="In" />
+          <Parameter Name="Duration_of_immunity" Type="int" Mode="In" />
+          <Parameter Name="CFR" Type="int" Mode="In" />
+          <Parameter Name="IFR" Type="int" Mode="In" />
+          <Parameter Name="History" Type="int" Mode="In" />
+          <Parameter Name="Public_Awareness" Type="int" Mode="In" />
+          <Parameter Name="Symptom_induced_fear" Type="int" Mode="In" />
+          <Parameter Name="Uncertainty_of_Agent_Species" Type="int" Mode="In" />
+          <Parameter Name="Uncertainty_of_Agent_Relatives" Type="int" Mode="In" />
+          <Parameter Name="Detection" Type="int" Mode="In" />
+          <Parameter Name="System" Type="int" Mode="In" />
+          <Parameter Name="Environment" Type="int" Mode="In" />
+          <Parameter Name="Prevention" Type="int" Mode="In" />
+          <Parameter Name="Response" Type="int" Mode="In" />
+          <Parameter Name="User_Id" Type="nvarchar" Mode="In" />
+          <Parameter Name="Date" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="AddUser_Acct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UID" Type="int" Mode="In" />
+          <Parameter Name="FirstName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LastName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+          <Parameter Name="Location" Type="nvarchar" Mode="In" />
+          <Parameter Name="Occupation" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="FinishRegistration" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UID" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="FName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Loc" Type="nvarchar" Mode="In" />
+          <Parameter Name="Occupation" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Login_User_Acct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Email" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateUserCredentials" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UID" Type="nvarchar(max)" Mode="In" />
+          <Parameter Name="FName" Type="nvarchar" Mode="In" />
+          <Parameter Name="LName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Email" Type="nvarchar" Mode="In" />
+          <Parameter Name="Loc" Type="nvarchar" Mode="In" />
+          <Parameter Name="Occupation" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="Bio_Risk_ScaleModelStoreContainer">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Metric_Info" EntityType="Self.Metric_Info" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="_Geography" EntityType="Self._Geography" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [_Geography].[Country_Name] AS [Country_Name], 
+    [_Geography].[Agent] AS [Agent], 
+    [_Geography].[Case_Fatality_Ratio] AS [Case_Fatality_Ratio], 
+    [_Geography].[Contact_Rate] AS [Contact_Rate], 
+    [_Geography].[Degree_of_contact] AS [Degree_of_contact], 
+    [_Geography].[Duration_of_immunity] AS [Duration_of_immunity], 
+    [_Geography].[Environmental_persistance] AS [Environmental_persistance], 
+    [_Geography].[Vaccine_Treatment] AS [Vaccine_Treatment], 
+    [_Geography].[Drug_treatment] AS [Drug_treatment], 
+    [_Geography].[Generation_time] AS [Generation_time], 
+    [_Geography].[History] AS [History], 
+    [_Geography].[IFR] AS [IFR], 
+    [_Geography].[Infection_illness_overlap] AS [Infection_illness_overlap], 
+    [_Geography].[Number_of_possible_modes] AS [Number_of_possible_modes], 
+    [_Geography].[Probability_of_Transmission] AS [Probability_of_Transmission], 
+    [_Geography].[Uncertainty_of_Agent_Species] AS [Uncertainty_of_Agent_Species], 
+    [_Geography].[Uncertainty_of_Agent_Relatives] AS [Uncertainty_of_Agent_Relatives], 
+    [_Geography].[Host_Endemicity] AS [Host_Endemicity], 
+    [_Geography].[Resevoir_Endemicity] AS [Resevoir_Endemicity], 
+    [_Geography].[Resevoir_Type] AS [Resevoir_Type]
+    FROM [dbo].[_Geography] AS [_Geography]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Bio_Clinical" EntityType="Self.Bio_Clinical" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Bio_Clinical].[Host] AS [Host], 
+    [Bio_Clinical].[Generation_Time] AS [Generation_Time], 
+    [Bio_Clinical].[Duration_Immunity] AS [Duration_Immunity], 
+    [Bio_Clinical].[CFR] AS [CFR], 
+    [Bio_Clinical].[IFR] AS [IFR]
+    FROM [dbo].[Bio_Clinical] AS [Bio_Clinical]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Country_Codes" EntityType="Self.Country_Codes" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Country_Codes].[Country_Name] AS [Country_Name], 
+    [Country_Codes].[Country_Id] AS [Country_Id]
+    FROM [dbo].[Country_Codes] AS [Country_Codes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Drugs_Vaccines" EntityType="Self.Drugs_Vaccines" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Drugs_Vaccines].[Host] AS [Host], 
+    [Drugs_Vaccines].[Drug_treatment] AS [Drug_treatment], 
+    [Drugs_Vaccines].[Vaccine_treatment] AS [Vaccine_treatment]
+    FROM [dbo].[Drugs_Vaccines] AS [Drugs_Vaccines]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="GHSI" EntityType="Self.GHSI" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [GHSI].[Host] AS [Host], 
+    [GHSI].[Prevention] AS [Prevention], 
+    [GHSI].[Detection] AS [Detection], 
+    [GHSI].[Rapid_Response] AS [Rapid_Response], 
+    [GHSI].[Health_System] AS [Health_System], 
+    [GHSI].[Compliance] AS [Compliance], 
+    [GHSI].[Risk_Environment] AS [Risk_Environment]
+    FROM [dbo].[GHSI] AS [GHSI]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Metric_Sources" EntityType="Self.Metric_Sources" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Metric_Sources].[Metric_Id] AS [Metric_Id], 
+    [Metric_Sources].[Metric_Name] AS [Metric_Name], 
+    [Metric_Sources].[Metric_Source_Name] AS [Metric_Source_Name], 
+    [Metric_Sources].[Metric_Source_Link] AS [Metric_Source_Link], 
+    [Metric_Sources].[Metric_Citation] AS [Metric_Citation], 
+    [Metric_Sources].[Agent_Source_Name] AS [Agent_Source_Name], 
+    [Metric_Sources].[Agent_Source_Link] AS [Agent_Source_Link], 
+    [Metric_Sources].[Agent_Citation] AS [Agent_Citation]
+    FROM [dbo].[Metric_Sources] AS [Metric_Sources]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Psych" EntityType="Self.Psych" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Psych].[Host] AS [Host], 
+    [Psych].[History] AS [History], 
+    [Psych].[Public_Awareness] AS [Public_Awareness], 
+    [Psych].[Symptom_induced_fear] AS [Symptom_induced_fear], 
+    [Psych].[Uncertainty_of_Agent_Species] AS [Uncertainty_of_Agent_Species], 
+    [Psych].[Uncertainty_of_Agent_Relatives] AS [Uncertainty_of_Agent_Relatives]
+    FROM [dbo].[Psych] AS [Psych]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Resevoir Host Region" EntityType="Self.Resevoir Host Region" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Resevoir Host Region].[Resevoir Type] AS [Resevoir Type], 
+    [Resevoir Host Region].[Resevoir Endemicity] AS [Resevoir Endemicity], 
+    [Resevoir Host Region].[Host Endemicity] AS [Host Endemicity], 
+    [Resevoir Host Region].[Host] AS [Host]
+    FROM [dbo].[Resevoir Host Region] AS [Resevoir Host Region]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Survey_History" EntityType="Self.Survey_History" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Survey_History].[Compliance] AS [Compliance], 
+    [Survey_History].[Resevoir_Type] AS [Resevoir_Type], 
+    [Survey_History].[Resevoir_Endemicity] AS [Resevoir_Endemicity], 
+    [Survey_History].[Host_Endemicity] AS [Host_Endemicity], 
+    [Survey_History].[Degree_of_contact] AS [Degree_of_contact], 
+    [Survey_History].[Number_of_possible_modes] AS [Number_of_possible_modes], 
+    [Survey_History].[Environmental_persistance] AS [Environmental_persistance], 
+    [Survey_History].[Infection_illness_overlap] AS [Infection_illness_overlap], 
+    [Survey_History].[Drug_treatment] AS [Drug_treatment], 
+    [Survey_History].[Vaccine_Treatment] AS [Vaccine_Treatment], 
+    [Survey_History].[Generation_time] AS [Generation_time], 
+    [Survey_History].[Duration_of_immunity] AS [Duration_of_immunity], 
+    [Survey_History].[CFR] AS [CFR], 
+    [Survey_History].[IFR] AS [IFR], 
+    [Survey_History].[History] AS [History], 
+    [Survey_History].[Public_Awareness] AS [Public_Awareness], 
+    [Survey_History].[Symptom_induced_fear] AS [Symptom_induced_fear], 
+    [Survey_History].[Uncertainty_of_Agent_Species] AS [Uncertainty_of_Agent_Species], 
+    [Survey_History].[Uncertainty_of_Agent_Relatives] AS [Uncertainty_of_Agent_Relatives], 
+    [Survey_History].[Detection] AS [Detection], 
+    [Survey_History].[System] AS [System], 
+    [Survey_History].[Environment] AS [Environment], 
+    [Survey_History].[prevention] AS [prevention], 
+    [Survey_History].[response] AS [response], 
+    [Survey_History].[user_id] AS [user_id], 
+    [Survey_History].[_Date] AS [_Date]
+    FROM [dbo].[Survey_History] AS [Survey_History]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Testing_Pathogens" EntityType="Self.Testing_Pathogens" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Testing_Pathogens].[Agent_Name] AS [Agent_Name], 
+    [Testing_Pathogens].[Resevoir_Type] AS [Resevoir_Type], 
+    [Testing_Pathogens].[Resevoir_Endemicity] AS [Resevoir_Endemicity], 
+    [Testing_Pathogens].[Host_Endemicity] AS [Host_Endemicity], 
+    [Testing_Pathogens].[Contact_Rate] AS [Contact_Rate], 
+    [Testing_Pathogens].[Probability_of_Transmission] AS [Probability_of_Transmission], 
+    [Testing_Pathogens].[Degree_of_contact] AS [Degree_of_contact], 
+    [Testing_Pathogens].[Number_of_possible_modes] AS [Number_of_possible_modes], 
+    [Testing_Pathogens].[Environmental_persistance] AS [Environmental_persistance], 
+    [Testing_Pathogens].[Infection_illness_overlap] AS [Infection_illness_overlap], 
+    [Testing_Pathogens].[Drug_treatment] AS [Drug_treatment], 
+    [Testing_Pathogens].[Vaccine_Treatment] AS [Vaccine_Treatment], 
+    [Testing_Pathogens].[Generation_time] AS [Generation_time], 
+    [Testing_Pathogens].[Duration_of_immunity] AS [Duration_of_immunity], 
+    [Testing_Pathogens].[CFR] AS [CFR], 
+    [Testing_Pathogens].[IFR] AS [IFR], 
+    [Testing_Pathogens].[History] AS [History], 
+    [Testing_Pathogens].[Public_Awareness] AS [Public_Awareness], 
+    [Testing_Pathogens].[Symptom_induced_fear] AS [Symptom_induced_fear], 
+    [Testing_Pathogens].[Uncertainty_of_Agent_Species] AS [Uncertainty_of_Agent_Species], 
+    [Testing_Pathogens].[Uncertainty_of_Agent_Relatives] AS [Uncertainty_of_Agent_Relatives]
+    FROM [dbo].[Testing_Pathogens] AS [Testing_Pathogens]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Transmission" EntityType="Self.Transmission" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Transmission].[Host] AS [Host], 
+    [Transmission].[Degree_of_Contact] AS [Degree_of_Contact], 
+    [Transmission].[Number_of_possible_modes] AS [Number_of_possible_modes], 
+    [Transmission].[Environmental_Persistence] AS [Environmental_Persistence], 
+    [Transmission].[Infectivity_Overlap] AS [Infectivity_Overlap]
+    FROM [dbo].[Transmission] AS [Transmission]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="User_Accounts" EntityType="Self.User_Accounts" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [User_Accounts].[User_Id] AS [User_Id], 
+    [User_Accounts].[First_Name] AS [First_Name], 
+    [User_Accounts].[Last_Name] AS [Last_Name], 
+    [User_Accounts].[Email] AS [Email], 
+    [User_Accounts].[_Password] AS [_Password], 
+    [User_Accounts].[_Location] AS [_Location], 
+    [User_Accounts].[Occupation] AS [Occupation]
+    FROM [dbo].[User_Accounts] AS [User_Accounts]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Bio_Risk_ScaleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Metric_Info">
+          <Key>
+            <PropertyRef Name="Metric_Id" />
+          </Key>
+          <Property Name="Metric_Id" Type="Int32" Nullable="false" />
+          <Property Name="Metric_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Metric_Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Sources" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="C_Geography">
+          <Key>
+            <PropertyRef Name="Country_Name" />
+            <PropertyRef Name="Agent" />
+            <PropertyRef Name="Case_Fatality_Ratio" />
+            <PropertyRef Name="Contact_Rate" />
+            <PropertyRef Name="Degree_of_contact" />
+            <PropertyRef Name="Duration_of_immunity" />
+            <PropertyRef Name="Environmental_persistance" />
+            <PropertyRef Name="Vaccine_Treatment" />
+            <PropertyRef Name="Drug_treatment" />
+            <PropertyRef Name="Generation_time" />
+            <PropertyRef Name="History" />
+            <PropertyRef Name="IFR" />
+            <PropertyRef Name="Infection_illness_overlap" />
+            <PropertyRef Name="Number_of_possible_modes" />
+            <PropertyRef Name="Probability_of_Transmission" />
+            <PropertyRef Name="Uncertainty_of_Agent_Species" />
+            <PropertyRef Name="Uncertainty_of_Agent_Relatives" />
+            <PropertyRef Name="Host_Endemicity" />
+            <PropertyRef Name="Resevoir_Endemicity" />
+            <PropertyRef Name="Resevoir_Type" />
+          </Key>
+          <Property Name="Country_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Agent" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Case_Fatality_Ratio" Type="Int32" Nullable="false" />
+          <Property Name="Contact_Rate" Type="Int32" Nullable="false" />
+          <Property Name="Degree_of_contact" Type="Int32" Nullable="false" />
+          <Property Name="Duration_of_immunity" Type="Int32" Nullable="false" />
+          <Property Name="Environmental_persistance" Type="Int32" Nullable="false" />
+          <Property Name="Vaccine_Treatment" Type="Int32" Nullable="false" />
+          <Property Name="Drug_treatment" Type="Int32" Nullable="false" />
+          <Property Name="Generation_time" Type="Int32" Nullable="false" />
+          <Property Name="History" Type="Int32" Nullable="false" />
+          <Property Name="IFR" Type="Int32" Nullable="false" />
+          <Property Name="Infection_illness_overlap" Type="Int32" Nullable="false" />
+          <Property Name="Number_of_possible_modes" Type="Int32" Nullable="false" />
+          <Property Name="Probability_of_Transmission" Type="Int32" Nullable="false" />
+          <Property Name="Uncertainty_of_Agent_Species" Type="Int32" Nullable="false" />
+          <Property Name="Uncertainty_of_Agent_Relatives" Type="Int32" Nullable="false" />
+          <Property Name="Host_Endemicity" Type="Int32" Nullable="false" />
+          <Property Name="Resevoir_Endemicity" Type="Int32" Nullable="false" />
+          <Property Name="Resevoir_Type" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Bio_Clinical">
+          <Key>
+            <PropertyRef Name="Host" />
+            <PropertyRef Name="Generation_Time" />
+          </Key>
+          <Property Name="Host" Type="Int32" Nullable="false" />
+          <Property Name="Generation_Time" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Duration_Immunity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CFR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IFR" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Country_Codes">
+          <Key>
+            <PropertyRef Name="Country_Name" />
+            <PropertyRef Name="Country_Id" />
+          </Key>
+          <Property Name="Country_Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Country_Id" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Drugs_Vaccines">
+          <Key>
+            <PropertyRef Name="Host" />
+            <PropertyRef Name="Drug_treatment" />
+          </Key>
+          <Property Name="Host" Type="Int32" Nullable="false" />
+          <Property Name="Drug_treatment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Vaccine_treatment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="GHSI">
+          <Key>
+            <PropertyRef Name="Host" />
+            <PropertyRef Name="Prevention" />
+          </Key>
+          <Property Name="Host" Type="Int32" Nullable="false" />
+          <Property Name="Prevention" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Detection" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Rapid_Response" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Health_System" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Compliance" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Risk_Environment" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Metric_Sources">
+          <Key>
+            <PropertyRef Name="Metric_Id" />
+          </Key>
+          <Property Name="Metric_Id" Type="Int32" Nullable="false" />
+          <Property Name="Metric_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Metric_Source_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Metric_Source_Link" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Metric_Citation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Agent_Source_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Agent_Source_Link" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Agent_Citation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Psych">
+          <Key>
+            <PropertyRef Name="Host" />
+            <PropertyRef Name="History" />
+          </Key>
+          <Property Name="Host" Type="Int32" Nullable="false" />
+          <Property Name="History" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Public_Awareness" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Symptom_induced_fear" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Uncertainty_of_Agent_Species" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Uncertainty_of_Agent_Relatives" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Resevoir_Host_Region">
+          <Key>
+            <PropertyRef Name="Host" />
+          </Key>
+          <Property Name="Resevoir_Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Resevoir_Endemicity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Host_Endemicity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Host" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Testing_Pathogens">
+          <Key>
+            <PropertyRef Name="Agent_Name" />
+            <PropertyRef Name="Resevoir_Type" />
+            <PropertyRef Name="Number_of_possible_modes" />
+            <PropertyRef Name="Generation_time" />
+          </Key>
+          <Property Name="Agent_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Resevoir_Type" Type="Int32" Nullable="false" />
+          <Property Name="Resevoir_Endemicity" Type="Int32" />
+          <Property Name="Host_Endemicity" Type="Int32" />
+          <Property Name="Contact_Rate" Type="Int32" />
+          <Property Name="Probability_of_Transmission" Type="Int32" />
+          <Property Name="Degree_of_contact" Type="Int32" />
+          <Property Name="Number_of_possible_modes" Type="Int32" Nullable="false" />
+          <Property Name="Environmental_persistance" Type="Int32" />
+          <Property Name="Infection_illness_overlap" Type="Int32" />
+          <Property Name="Drug_treatment" Type="Int32" />
+          <Property Name="Vaccine_Treatment" Type="Int32" />
+          <Property Name="Generation_time" Type="Int32" Nullable="false" />
+          <Property Name="Duration_of_immunity" Type="Int32" />
+          <Property Name="CFR" Type="Int32" />
+          <Property Name="IFR" Type="Int32" />
+          <Property Name="History" Type="Int32" />
+          <Property Name="Public_Awareness" Type="Int32" />
+          <Property Name="Symptom_induced_fear" Type="Int32" />
+          <Property Name="Uncertainty_of_Agent_Species" Type="Int32" />
+          <Property Name="Uncertainty_of_Agent_Relatives" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Transmission">
+          <Key>
+            <PropertyRef Name="Host" />
+          </Key>
+          <Property Name="Host" Type="Int32" Nullable="false" />
+          <Property Name="Degree_of_Contact" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Number_of_possible_modes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Environmental_Persistence" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Infectivity_Overlap" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="User_Accounts">
+          <Key>
+            <PropertyRef Name="User_Id" />
+            <PropertyRef Name="First_Name" />
+            <PropertyRef Name="Last_Name" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="C_Password" />
+          </Key>
+          <Property Name="User_Id" Type="Int32" Nullable="false" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="C_Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="C_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Occupation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="Bio_Risk_ScaleEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Metric_Info" EntityType="Self.Metric_Info" />
+          <EntitySet Name="C_Geography" EntityType="Self.C_Geography" />
+          <EntitySet Name="Bio_Clinical" EntityType="Self.Bio_Clinical" />
+          <EntitySet Name="Country_Codes" EntityType="Self.Country_Codes" />
+          <EntitySet Name="Drugs_Vaccines" EntityType="Self.Drugs_Vaccines" />
+          <EntitySet Name="GHSIs" EntityType="Self.GHSI" />
+          <EntitySet Name="Metric_Sources" EntityType="Self.Metric_Sources" />
+          <EntitySet Name="Psyches" EntityType="Self.Psych" />
+          <EntitySet Name="Resevoir_Host_Regions" EntityType="Self.Resevoir_Host_Region" />
+          <EntitySet Name="Testing_Pathogens" EntityType="Self.Testing_Pathogens" />
+          <EntitySet Name="Transmissions" EntityType="Self.Transmission" />
+          <EntitySet Name="User_Accounts" EntityType="Self.User_Accounts" />
+          <FunctionImport Name="AddSurvey_Results" ReturnType="Collection(Int32)">
+            <Parameter Name="Compliance" Mode="In" Type="Int32" />
+            <Parameter Name="Resevoir_Type" Mode="In" Type="Int32" />
+            <Parameter Name="Resevoir_End" Mode="In" Type="Int32" />
+            <Parameter Name="Host_End" Mode="In" Type="Int32" />
+            <Parameter Name="Degree_of_contact" Mode="In" Type="Int32" />
+            <Parameter Name="Number_of_possible_modes" Mode="In" Type="Int32" />
+            <Parameter Name="Environmental_persistance" Mode="In" Type="Int32" />
+            <Parameter Name="Infection_illness_overlap" Mode="In" Type="Int32" />
+            <Parameter Name="Drug_treatment" Mode="In" Type="Int32" />
+            <Parameter Name="Vaccine_Treatment" Mode="In" Type="Int32" />
+            <Parameter Name="Generation_time" Mode="In" Type="Int32" />
+            <Parameter Name="Duration_of_immunity" Mode="In" Type="Int32" />
+            <Parameter Name="CFR" Mode="In" Type="Int32" />
+            <Parameter Name="IFR" Mode="In" Type="Int32" />
+            <Parameter Name="History" Mode="In" Type="Int32" />
+            <Parameter Name="Public_Awareness" Mode="In" Type="Int32" />
+            <Parameter Name="Symptom_induced_fear" Mode="In" Type="Int32" />
+            <Parameter Name="Uncertainty_of_Agent_Species" Mode="In" Type="Int32" />
+            <Parameter Name="Uncertainty_of_Agent_Relatives" Mode="In" Type="Int32" />
+            <Parameter Name="Detection" Mode="In" Type="Int32" />
+            <Parameter Name="System" Mode="In" Type="Int32" />
+            <Parameter Name="Environment" Mode="In" Type="Int32" />
+            <Parameter Name="Prevention" Mode="In" Type="Int32" />
+            <Parameter Name="Response" Mode="In" Type="Int32" />
+            <Parameter Name="User_Id" Mode="In" Type="String" />
+            <Parameter Name="Date" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="AddUser_Acct" ReturnType="Collection(Int32)">
+            <Parameter Name="UID" Mode="In" Type="Int32" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Location" Mode="In" Type="String" />
+            <Parameter Name="Occupation" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Login_User_Acct" ReturnType="Collection(Bio_Risk_ScaleModel.Login_User_Acct_Result)">
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="FinishRegistration" ReturnType="Collection(Int32)">
+            <Parameter Name="UID" Mode="In" Type="String" />
+            <Parameter Name="FName" Mode="In" Type="String" />
+            <Parameter Name="LName" Mode="In" Type="String" />
+            <Parameter Name="Loc" Mode="In" Type="String" />
+            <Parameter Name="Occupation" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="AspNetUsers" EntityType="Bio_Risk_ScaleModel.AspNetUser" />
+          <FunctionImport Name="UpdateUserCredentials" ReturnType="Collection(Int32)">
+            <Parameter Name="UID" Mode="In" Type="String" />
+            <Parameter Name="FName" Mode="In" Type="String" />
+            <Parameter Name="LName" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Loc" Mode="In" Type="String" />
+            <Parameter Name="Occupation" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="Survey_History" EntityType="Bio_Risk_ScaleModel.Survey_History" />
+        </EntityContainer>
+        <ComplexType Name="Login_User_Acct_Result">
+          <Property Type="Int32" Name="User_Id" Nullable="false" />
+          <Property Type="String" Name="First_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Last_Name" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Email" Nullable="false" />
+          <Property Type="String" Name="C_Password" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="C_Location" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Occupation" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="C_Location" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Occupation" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Survey_History">
+          <Key>
+            <PropertyRef Name="Compliance" />
+            <PropertyRef Name="Resevoir_Type" />
+            <PropertyRef Name="Resevoir_Endemicity" />
+            <PropertyRef Name="Host_Endemicity" />
+            <PropertyRef Name="Degree_of_contact" />
+            <PropertyRef Name="Number_of_possible_modes" />
+            <PropertyRef Name="Environmental_persistance" />
+            <PropertyRef Name="Infection_illness_overlap" />
+            <PropertyRef Name="Drug_treatment" />
+            <PropertyRef Name="Vaccine_Treatment" />
+            <PropertyRef Name="Generation_time" />
+            <PropertyRef Name="Duration_of_immunity" />
+            <PropertyRef Name="CFR" />
+            <PropertyRef Name="IFR" />
+            <PropertyRef Name="History" />
+            <PropertyRef Name="Public_Awareness" />
+            <PropertyRef Name="Symptom_induced_fear" />
+            <PropertyRef Name="Uncertainty_of_Agent_Species" />
+            <PropertyRef Name="Uncertainty_of_Agent_Relatives" />
+            <PropertyRef Name="Detection" />
+            <PropertyRef Name="System" />
+            <PropertyRef Name="Environment" />
+            <PropertyRef Name="prevention" />
+            <PropertyRef Name="response" />
+            <PropertyRef Name="user_id" />
+          </Key>
+          <Property Name="Compliance" Type="Int32" Nullable="false" />
+          <Property Name="Resevoir_Type" Type="Int32" Nullable="false" />
+          <Property Name="Resevoir_Endemicity" Type="Int32" Nullable="false" />
+          <Property Name="Host_Endemicity" Type="Int32" Nullable="false" />
+          <Property Name="Degree_of_contact" Type="Int32" Nullable="false" />
+          <Property Name="Number_of_possible_modes" Type="Int32" Nullable="false" />
+          <Property Name="Environmental_persistance" Type="Int32" Nullable="false" />
+          <Property Name="Infection_illness_overlap" Type="Int32" Nullable="false" />
+          <Property Name="Drug_treatment" Type="Int32" Nullable="false" />
+          <Property Name="Vaccine_Treatment" Type="Int32" Nullable="false" />
+          <Property Name="Generation_time" Type="Int32" Nullable="false" />
+          <Property Name="Duration_of_immunity" Type="Int32" Nullable="false" />
+          <Property Name="CFR" Type="Int32" Nullable="false" />
+          <Property Name="IFR" Type="Int32" Nullable="false" />
+          <Property Name="History" Type="Int32" Nullable="false" />
+          <Property Name="Public_Awareness" Type="Int32" Nullable="false" />
+          <Property Name="Symptom_induced_fear" Type="Int32" Nullable="false" />
+          <Property Name="Uncertainty_of_Agent_Species" Type="Int32" Nullable="false" />
+          <Property Name="Uncertainty_of_Agent_Relatives" Type="Int32" Nullable="false" />
+          <Property Name="Detection" Type="Int32" Nullable="false" />
+          <Property Name="System" Type="Int32" Nullable="false" />
+          <Property Name="Environment" Type="Int32" Nullable="false" />
+          <Property Name="prevention" Type="Int32" Nullable="false" />
+          <Property Name="response" Type="Int32" Nullable="false" />
+          <Property Name="user_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="C_Date" Type="DateTime" Precision="3" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Bio_Risk_ScaleModelStoreContainer" CdmEntityContainer="Bio_Risk_ScaleEntities">
+          <EntitySetMapping Name="Metric_Info">
+            <EntityTypeMapping TypeName="Bio_Risk_ScaleModel.Metric_Info">
+              <MappingFragment StoreEntitySet="Metric_Info">
+                <ScalarProperty Name="Metric_Id" ColumnName="Metric_Id" />
+                <ScalarProperty Name="Metric_Name" ColumnName="Metric_Name" />
+                <ScalarProperty Name="Metric_Description" ColumnName="Metric_Description" />
+                <ScalarProperty Name="Sources" ColumnName="Sources" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="C_Geography">
+            <EntityTypeMapping TypeName="Bio_Risk_ScaleModel.C_Geography">
+              <MappingFragment StoreEntitySet="_Geography">
+                <ScalarProperty Name="Country_Name" ColumnName="Country_Name" />
+                <ScalarProperty Name="Agent" ColumnName="Agent" />
+                <ScalarProperty Name="Case_Fatality_Ratio" ColumnName="Case_Fatality_Ratio" />
+                <ScalarProperty Name="Contact_Rate" ColumnName="Contact_Rate" />
+                <ScalarProperty Name="Degree_of_contact" ColumnName="Degree_of_contact" />
+                <ScalarProperty Name="Duration_of_immunity" ColumnName="Duration_of_immunity" />
+                <ScalarProperty Name="Environmental_persistance" ColumnName="Environmental_persistance" />
+                <ScalarProperty Name="Vaccine_Treatment" ColumnName="Vaccine_Treatment" />
+                <ScalarProperty Name="Drug_treatment" ColumnName="Drug_treatment" />
+                <ScalarProperty Name="Generation_time" ColumnName="Generation_time" />
+                <ScalarProperty Name="History" ColumnName="History" />
+                <ScalarProperty Name="IFR" ColumnName="IFR" />
+                <ScalarProperty Name="Infection_illness_overlap" ColumnName="Infection_illness_overlap" />
+                <ScalarProperty Name="Number_of_possible_modes" ColumnName="Number_of_possible_modes" />
+                <ScalarProperty Name="Probability_of_Transmission" ColumnName="Probability_of_Transmission" />
+                <ScalarProperty Name="Uncertainty_of_Agent_Species" ColumnName="Uncertainty_of_Agent_Species" />
+                <ScalarProperty Name="Uncertainty_of_Agent_Relatives" ColumnName="Uncertainty_of_Agent_Relatives" />
+                <ScalarProperty Name="Host_Endemicity" ColumnName="Host_Endemicity" />
+                <ScalarProperty Name="Resevoir_Endemicity" ColumnName="Resevoir_Endemicity" />
+                <ScalarProperty Name="Resevoir_Type" ColumnName="Resevoir_Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bio_Clinical">
+            <EntityTypeMapping TypeName="Bio_Risk_ScaleModel.Bio_Clinical">
+              <MappingFragment StoreEntitySet="Bio_Clinical">
+                <ScalarProperty Name="Host" ColumnName="Host" />
+                <ScalarProperty Name="Generation_Time" ColumnName="Generation_Time" />
+                <ScalarProperty Name="Duration_Immunity" ColumnName="Duration_Immunity" />
+                <ScalarProperty Name="CFR" ColumnName="CFR" />
+                <ScalarProperty Name="IFR" ColumnName="IFR" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Country_Codes">
+            <EntityTypeMapping TypeName="Bio_Risk_ScaleModel.Country_Codes">
+              <MappingFragment StoreEntitySet="Country_Codes">
+                <ScalarProperty Name="Country_Name" ColumnName="Country_Name" />
+                <ScalarProperty Name="Country_Id" ColumnName="Country_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Drugs_Vaccines">
+            <EntityTypeMapping TypeName="Bio_Risk_ScaleModel.Drugs_Vaccines">
+              <MappingFragment StoreEntitySet="Drugs_Vaccines">
+                <ScalarProperty Name="Host" ColumnName="Host" />
+                <ScalarProperty Name="Drug_treatment" ColumnName="Drug_treatment" />
+                <ScalarProperty Name="Vaccine_treatment" ColumnName="Vaccine_treatment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GHSIs">
+            <EntityTypeMapping TypeName="Bio_Risk_ScaleModel.GHSI">
+              <MappingFragment StoreEntitySet="GHSI">
+                <ScalarProperty Name="Host" ColumnName="Host" />
+                <ScalarProperty Name="Prevention" ColumnName="Prevention" />
+                <ScalarProperty Name="Detection" ColumnName="Detection" />
+                <ScalarProperty Name="Rapid_Response" ColumnName="Rapid_Response" />
+                <ScalarProperty Name="Health_System" ColumnName="Health_System" />
+                <ScalarProperty Name="Compliance" ColumnName="Compliance" />
+                <ScalarProperty Name="Risk_Environment" ColumnName="Risk_Environment" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Metric_Sources">
+            <EntityTypeMapping TypeName="Bio_Risk_ScaleModel.Metric_Sources">
+              <MappingFragment StoreEntitySet="Metric_Sources">
+                <ScalarProperty Name="Metric_Id" ColumnName="Metric_Id" />
+                <ScalarProperty Name="Metric_Name" ColumnName="Metric_Name" />
+                <ScalarProperty Name="Metric_Source_Name" ColumnName="Metric_Source_Name" />
+                <ScalarProperty Name="Metric_Source_Link" ColumnName="Metric_Source_Link" />
+                <ScalarProperty Name="Metric_Citation" ColumnName="Metric_Citation" />
+                <ScalarProperty Name="Agent_Source_Name" ColumnName="Agent_Source_Name" />
+                <ScalarProperty Name="Agent_Source_Link" ColumnName="Agent_Source_Link" />
+                <ScalarProperty Name="Agent_Citation" ColumnName="Agent_Citation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Psyches">
+            <EntityTypeMapping TypeName="Bio_Risk_ScaleModel.Psych">
+              <MappingFragment StoreEntitySet="Psych">
+                <ScalarProperty Name="Host" ColumnName="Host" />
+                <ScalarProperty Name="History" ColumnName="History" />
+                <ScalarProperty Name="Public_Awareness" ColumnName="Public_Awareness" />
+                <ScalarProperty Name="Symptom_induced_fear" ColumnName="Symptom_induced_fear" />
+                <ScalarProperty Name="Uncertainty_of_Agent_Species" ColumnName="Uncertainty_of_Agent_Species" />
+                <ScalarProperty Name="Uncertainty_of_Agent_Relatives" ColumnName="Uncertainty_of_Agent_Relatives" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resevoir_Host_Regions">
+            <EntityTypeMapping TypeName="Bio_Risk_ScaleModel.Resevoir_Host_Region">
+              <MappingFragment StoreEntitySet="Resevoir Host Region">
+                <ScalarProperty Name="Resevoir_Type" ColumnName="Resevoir Type" />
+                <ScalarProperty Name="Resevoir_Endemicity" ColumnName="Resevoir Endemicity" />
+                <ScalarProperty Name="Host_Endemicity" ColumnName="Host Endemicity" />
+                <ScalarProperty Name="Host" ColumnName="Host" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Testing_Pathogens">
+            <EntityTypeMapping TypeName="Bio_Risk_ScaleModel.Testing_Pathogens">
+              <MappingFragment StoreEntitySet="Testing_Pathogens">
+                <ScalarProperty Name="Agent_Name" ColumnName="Agent_Name" />
+                <ScalarProperty Name="Resevoir_Type" ColumnName="Resevoir_Type" />
+                <ScalarProperty Name="Resevoir_Endemicity" ColumnName="Resevoir_Endemicity" />
+                <ScalarProperty Name="Host_Endemicity" ColumnName="Host_Endemicity" />
+                <ScalarProperty Name="Contact_Rate" ColumnName="Contact_Rate" />
+                <ScalarProperty Name="Probability_of_Transmission" ColumnName="Probability_of_Transmission" />
+                <ScalarProperty Name="Degree_of_contact" ColumnName="Degree_of_contact" />
+                <ScalarProperty Name="Number_of_possible_modes" ColumnName="Number_of_possible_modes" />
+                <ScalarProperty Name="Environmental_persistance" ColumnName="Environmental_persistance" />
+                <ScalarProperty Name="Infection_illness_overlap" ColumnName="Infection_illness_overlap" />
+                <ScalarProperty Name="Drug_treatment" ColumnName="Drug_treatment" />
+                <ScalarProperty Name="Vaccine_Treatment" ColumnName="Vaccine_Treatment" />
+                <ScalarProperty Name="Generation_time" ColumnName="Generation_time" />
+                <ScalarProperty Name="Duration_of_immunity" ColumnName="Duration_of_immunity" />
+                <ScalarProperty Name="CFR" ColumnName="CFR" />
+                <ScalarProperty Name="IFR" ColumnName="IFR" />
+                <ScalarProperty Name="History" ColumnName="History" />
+                <ScalarProperty Name="Public_Awareness" ColumnName="Public_Awareness" />
+                <ScalarProperty Name="Symptom_induced_fear" ColumnName="Symptom_induced_fear" />
+                <ScalarProperty Name="Uncertainty_of_Agent_Species" ColumnName="Uncertainty_of_Agent_Species" />
+                <ScalarProperty Name="Uncertainty_of_Agent_Relatives" ColumnName="Uncertainty_of_Agent_Relatives" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transmissions">
+            <EntityTypeMapping TypeName="Bio_Risk_ScaleModel.Transmission">
+              <MappingFragment StoreEntitySet="Transmission">
+                <ScalarProperty Name="Host" ColumnName="Host" />
+                <ScalarProperty Name="Degree_of_Contact" ColumnName="Degree_of_Contact" />
+                <ScalarProperty Name="Number_of_possible_modes" ColumnName="Number_of_possible_modes" />
+                <ScalarProperty Name="Environmental_Persistence" ColumnName="Environmental_Persistence" />
+                <ScalarProperty Name="Infectivity_Overlap" ColumnName="Infectivity_Overlap" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Accounts">
+            <EntityTypeMapping TypeName="Bio_Risk_ScaleModel.User_Accounts">
+              <MappingFragment StoreEntitySet="User_Accounts">
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="C_Password" ColumnName="_Password" />
+                <ScalarProperty Name="C_Location" ColumnName="_Location" />
+                <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="AddSurvey_Results" FunctionName="Bio_Risk_ScaleModel.Store.AddSurvey_Results" />
+          <FunctionImportMapping FunctionImportName="AddUser_Acct" FunctionName="Bio_Risk_ScaleModel.Store.AddUser_Acct" />
+          <FunctionImportMapping FunctionImportName="Login_User_Acct" FunctionName="Bio_Risk_ScaleModel.Store.Login_User_Acct">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="Bio_Risk_ScaleModel.Login_User_Acct_Result">
+                <ScalarProperty Name="User_Id" ColumnName="User_Id" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="C_Password" ColumnName="_Password" />
+                <ScalarProperty Name="C_Location" ColumnName="_Location" />
+                <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="FinishRegistration" FunctionName="Bio_Risk_ScaleModel.Store.FinishRegistration" />
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="Bio_Risk_ScaleModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+                <ScalarProperty Name="C_Location" ColumnName="_Location" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="UpdateUserCredentials" FunctionName="Bio_Risk_ScaleModel.Store.UpdateUserCredentials" />
+          <EntitySetMapping Name="Survey_History">
+            <EntityTypeMapping TypeName="Bio_Risk_ScaleModel.Survey_History">
+              <MappingFragment StoreEntitySet="Survey_History">
+                <ScalarProperty Name="C_Date" ColumnName="_Date" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
+                <ScalarProperty Name="response" ColumnName="response" />
+                <ScalarProperty Name="prevention" ColumnName="prevention" />
+                <ScalarProperty Name="Environment" ColumnName="Environment" />
+                <ScalarProperty Name="System" ColumnName="System" />
+                <ScalarProperty Name="Detection" ColumnName="Detection" />
+                <ScalarProperty Name="Uncertainty_of_Agent_Relatives" ColumnName="Uncertainty_of_Agent_Relatives" />
+                <ScalarProperty Name="Uncertainty_of_Agent_Species" ColumnName="Uncertainty_of_Agent_Species" />
+                <ScalarProperty Name="Symptom_induced_fear" ColumnName="Symptom_induced_fear" />
+                <ScalarProperty Name="Public_Awareness" ColumnName="Public_Awareness" />
+                <ScalarProperty Name="History" ColumnName="History" />
+                <ScalarProperty Name="IFR" ColumnName="IFR" />
+                <ScalarProperty Name="CFR" ColumnName="CFR" />
+                <ScalarProperty Name="Duration_of_immunity" ColumnName="Duration_of_immunity" />
+                <ScalarProperty Name="Generation_time" ColumnName="Generation_time" />
+                <ScalarProperty Name="Vaccine_Treatment" ColumnName="Vaccine_Treatment" />
+                <ScalarProperty Name="Drug_treatment" ColumnName="Drug_treatment" />
+                <ScalarProperty Name="Infection_illness_overlap" ColumnName="Infection_illness_overlap" />
+                <ScalarProperty Name="Environmental_persistance" ColumnName="Environmental_persistance" />
+                <ScalarProperty Name="Number_of_possible_modes" ColumnName="Number_of_possible_modes" />
+                <ScalarProperty Name="Degree_of_contact" ColumnName="Degree_of_contact" />
+                <ScalarProperty Name="Host_Endemicity" ColumnName="Host_Endemicity" />
+                <ScalarProperty Name="Resevoir_Endemicity" ColumnName="Resevoir_Endemicity" />
+                <ScalarProperty Name="Resevoir_Type" ColumnName="Resevoir_Type" />
+                <ScalarProperty Name="Compliance" ColumnName="Compliance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

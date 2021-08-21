@@ -1,0 +1,202 @@
+﻿@model WebApplication1.ViewModels.DrugVaccinesVM
+<h1> <span style="padding-left: 10px; padding-right: 10px"> Drugs & Vaccines </span></h1>
+
+<div class="progress">
+    <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="67" aria-valuemin="0" aria-valuemax="100" style="width: 67%">
+        <span class="sr-only">54% ( 12 answered / 22 total )</span>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-9">
+        <div style="overflow-x: auto">
+            <table id="drug">
+                <tr>
+                    <th colspan="10">
+                        Drug Treatments<span tabindex="0" data-toggle="tooltip" title="This metric is pre-filled based on your geographic location" class="d-inline-block glyphicon glyphicon-info-sign"></span>
+                                       <p>@Model.Metrics.DrugTreatment.Description</p>
+                    </th>
+                </tr>
+                <tr>
+                    @foreach (var type in Model.DrugTreatments)
+                    {
+                        if (Model.Recs.DrugTreatment.Host == type.Host)
+                        {
+                            <td id="drug-treatment" style="border: 4px dashed #286090;background-color: #fff877; " value="@type.Host">@type.Name</td>
+                        }
+                        else
+                        {
+                            <td style="background-color: white;" value="@type.Host">@type.Name</td>
+                        }
+                    }
+                </tr>
+            </table>
+        </div>
+
+        <div style="overflow-x: auto">
+            @*<table id="vaccine">
+                <tr>
+                    <th colspan="10">
+                        Vaccine Treatments<span data-toggle="tooltip" title="required">*</span>
+                        <p>(whether a vaccine for this infectious disease is available, and if so, the degree of efficacy of the immune protection provided by the vaccine)</p>
+                    </th>
+                </tr>
+                <tr>*@
+                    @*@foreach (var type in Model.VaccineTreatments)
+                    {*@
+                        @*if (Model.Recs.vaccinetreatment.Host == type.Host)
+                        {
+                            <td id="res-type" style="border: 4px dashed #fff877;" value="@type.Host">@type.Name</td>
+                        }
+                        else
+                        {
+                            <td style="background-color: white;" value="@type.Host">@type.Name</td>
+                        }*@
+                    @*  *@}
+                @*</tr>
+            </table>*@
+        </div>
+    </div>
+
+    <div style="margin-top: 10px;" class="panel-group col-md-3" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default">
+            <div style="background-color:antiquewhite" class="panel-heading" role="tab" id="headingOne">
+                <h4 class="panel-title">
+                    <a style="text-decoration: none" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        For more information on how we determined these metrics
+                    </a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
+                <div style="overflow-x:auto" class="panel-body">
+                    <table>
+                        <tr>
+                            <th>Metric</th>
+                            <th>Info</th>
+                        </tr>
+                        <tr>
+                            <td>@Model.Metrics.DrugTreatment.Name</td>
+                            @{
+                                var count = 1;
+                                foreach (var item in Model.Metrics.DrugTreatment.MetricSources)
+                                {
+                                    <td>
+                                        <a target="_blank" href="@item.MetricLink">@count@*@item.MetricLabel*@</a>
+                                    </td>
+                                    count++;
+                                }
+
+                                foreach (var item in Model.Metrics.DrugTreatment.AgentSources)
+                                {
+                                    <td>
+                                        <a target="_blank" href="@item.AgentLink">@count@*@item.AgentLabel*@</a>
+                                    </td>
+                                    count++;
+                                }
+                            }
+                        </tr>
+                        <tr>
+                            <td>@*@Model.Metrics.vaccine.Name*@</td>
+                            <td>@*@Model.Metrics.vaccine.Sources*@</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<input id="resetBtn" type="reset" value="reset" />
+<input id="nextBtn" type="submit" value="next" />
+
+<script>
+    let drug = ($('#drug td#drug-treatment').index() == -1) ? -1 : $('#drug td#drug-treatment').index(),
+        vaccine = -1;
+
+    $('td').on('mouseenter', function () {
+        if ($(this)[0].style.backgroundColor != 'rgb(255, 248, 119)')
+            $(this)[0].style.backgroundColor = '#f5f5f5';
+    })
+
+    $('td').on('mouseleave', function () {
+        if ($(this)[0].style.backgroundColor != 'rgb(255, 248, 119)')
+            $(this)[0].style.backgroundColor = 'white';
+    })
+
+    // Change input value on label click
+    $('#drug td').on('click', function () {
+        $('#drug th')[0].style.border = 'none';
+        if (drug == -1)
+            drug = 0;
+        $('#drug td')[drug].style.backgroundColor = 'white';
+        let index = $(this).index();
+        $('#drug td')[index].style.backgroundColor = '#fff877';
+        drug = index;
+    });
+
+    $('#vaccine td').on('click', function () {
+        $('#vaccine td')[vaccine].style.backgroundColor = 'white';
+        let index = $(this).index();
+        $('#vaccine td')[index].style.backgroundColor = '#fff877';
+        vaccine = index;
+    });
+
+    $('#nextBtn').on('click', function (e) {
+        e.preventDefault();
+
+        if (!validateAnswers()) {
+            alert('please fill out all remaining fields');
+            return;
+        }
+
+        let t = parseInt($('#drug td')[drug].getAttribute('value'));
+        //let v = parseInt($('#vaccine td')[vaccine].getAttribute('value'));
+        let v = 0;
+        let score = $('#score').val();
+        $('#score').val(parseInt(score) + t + v);
+
+        sessionStorage.drug_treatment = t;
+        sessionStorage.vaccine_treatment = v;
+
+        next();
+    })
+
+    function validateAnswers() {
+        //checking if indices are -1, meaning they never got clicked
+        let validated = true;
+        if (drug == -1) {
+            $('#drug th')[0].style.border = '2px groove red'
+            validated = false;
+        }
+        return validated;
+    }
+
+    function next() {
+        let countryName = $('#country_name').val();
+        let agentName = $('#agent_name').val();
+
+        $.ajax({
+            url: '/Survey/BioClinical',
+            type: 'post',
+            data: { countryName: countryName, agentName: agentName },
+            error: function (xhr) {
+                console.log('Request Status: ' + xhr.status + ' Status Text: ' + xhr.statusText);
+            },
+            success: function (response) {
+                user = response;
+                $('#survey').html(response);
+            }
+        });
+    }
+</script>
+
+<script>
+    $(".panel-heading").parent('.panel').hover(
+        function () {
+            $(this).children('.collapse').collapse('show');
+        }, function () {
+            $(this).children('.collapse').collapse('hide');
+        }
+    );
+</script>

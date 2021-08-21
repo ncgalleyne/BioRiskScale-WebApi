@@ -1,0 +1,354 @@
+﻿@model WebApplication1.ViewModels.SurveyVM
+@{
+    ViewBag.Title = "BioRisk Scale";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" integrity="sha512-6S2HWzVFxruDlZxI3sXOZZ4/eJ8AcxkQH1+JjSe/ONCEqR9L4Ysq5JdT5ipqtzU7WHalNwzwBv+iE51gNHJNqQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/Content/landing_pageStyle.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js" integrity="sha512-lbwH47l/tPXJYG9AcFNoJaTMhGvYWhVM9YI43CT+uteTRRaiLCui8snIgyAN8XWgNjNhCqlAUdzZptso6OCoFQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
+        @*Brand and toggle get grouped for better mobile display*@
+        <div class="navbar-header">
+            <a class="navbar-brand" href="#">BioRisk Survey</a>
+        </div>
+        @*Collect the nav links, forms, and other content for toggling*@
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        @{
+            if (!User.Identity.IsAuthenticated)
+            {
+
+                <ul id="accountBtns" class="nav navbar-nav">
+                    <li>
+                        <button type="button" class="btn" data-toggle="modal" data-target="#accountModal">Create an Account</button>
+                    </li>
+                    <li>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Login</button>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="#">Action</a></li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">One more separated link</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            }
+        }
+        @*<div id="userModalIcon" class="navbar-form navbar-right">
+            <button type="button" class="btn btn-primary glyphicon glyphicon-user" data-toggle="modal" data-target="#userModal"></button>
+        </div>*@
+        @{
+            if (User.Identity.IsAuthenticated)
+            {
+                <div id="userModalIcon" class="navbar-form navbar-right">
+                    <button type="button" class="btn btn-primary glyphicon glyphicon-user" data-toggle="modal" data-target="#userModal"></button>
+                </div>
+            }
+        }
+    </div>
+    </div>
+</nav>
+
+<div class="jumbotron">
+    <h1 style="color: ghostwhite"><em>Welcome to the BioRisk Scale</em></h1>
+</div>
+
+<div class="row">
+    <section id="survey">
+        <h2>Evaluate the risks presented by biological agents (biorisk) through this simple <a style="color:orange" href="/Home/Survey"> survey</a>.</h2>
+    </section>
+
+</div>
+
+<div class="row">
+    <section id="about">
+        <div class="col-md-6">
+            <h2><em>About us</em></h2>
+            @*<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#helpModal">How to</button>*@
+            <p>
+                Welcome to the biorisk survey.
+                As the world becomes more connected and biological science becomes more advanced, it is imperative that we all have access to risk evaluation for biological threats. Our goal is to ensure the long-term security of the world by providing a simple and accessible architecture for biorisk assessment. To this end, we have designed this survey to assess your local and national biothreat.
+            </p>
+
+            @*<p>Please find the key below.</p>*@
+
+            <p><a href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        </div>
+        <div class="col-md-6">
+            <img src="https://exceptionallyaveragethroughtheireyes.files.wordpress.com/2021/06/georgetown_seal_bluergb-255x300-1.jpeg?w=300" />
+        </div>
+    </section>
+
+    <section id="footer">
+        <footer>
+            <h2><em>Contact</em></h2>
+            <p><a href="mailto:mail@example.com">mail@example.com</a>@*<br> +1 123 456 789*@</p>
+            <p>3700 O St NW, Washington, DC 20057</p>
+        </footer>
+    </section>
+
+</div>
+
+<!--Login Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="loginModalLabel">Login to continue</h3>
+                <div class="input-group mb-3">
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-envelope" id="basic-addon1"></span>
+                        <input autofocus type="text" id="user-email" class="form-control" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-alert" id="basic-addon1"></span>
+                        <input type="password" id="user-pwd" class="form-control" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1">
+                    </div>
+                </div>
+                <div style="margin: 10px">
+                    <button type="button" id="closeBtn" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" id="loginBtn" class="btn btn-primary">login</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+            @*<div class="modal-footer">
+                    <div class="pull-right">
+                        <p>Not a member? <a href="#">Sign Up</a></p>
+                        <p>Forgot <a href="#">Password?</a></p>
+                    </div>
+                </div>*@
+        </div>
+    </div>
+</div>
+
+<!--Create Modal -->
+<div class="modal fade" id="accountModal" tabindex="-1" role="dialog" aria-labelledby="accountModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="accountModalLabel">Account Creation</h3>
+                <div class="input-group mb-3">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">First Name:</span>
+                        <input autofocus required type="text" class="form-control" id="fName" placeholder="First Name" aria-label="First Namee" aria-describedby="basic-addon1" enterkeyhint="next">
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group">
+                        <span class="input-group-addon" id="basic-addon1">Last Name:</span>
+                        <input type="text" class="form-control" id="lName" placeholder="Last Name" aria-label="Last Name" aria-describedby="basic-addon1" enterkeyhint="next">
+                    </div>
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group">
+                        <span class="glyphicon glyphicon-inbox input-group-addon" id="basic-addon1"></span>
+                        <input type="text" class="form-control" id="email" placeholder="Email" aria-label="Email" aria-describedby="basic-addon1" enterkeyhint="next">
+                    </div>
+
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group">
+                        <span class="glyphicon glyphicon-alert input-group-addon" id="basic-addon1"></span>
+                        <input type="password" class="form-control" id="pwd" placeholder="Password" aria-label="Password" aria-describedby="basic-addon1" enterkeyhint="next">
+                    </div>
+
+                </div>
+                <div class="input-group mb-3">
+                    @Html.Partial("_Geographics", Model)
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group">
+                        <span class="glyphicon glyphicon-user input-group-addon" id="basic-addon1"></span>
+                        <input type="text" class="form-control" id="occupation" placeholder="Occupation" aria-label="Location" aria-describedby="basic-addon1" enterkeyhint="done">
+                    </div>
+
+                </div>
+                <div style="margin: 10px">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button id="createBtn" type="button" class="btn btn-primary">Create</button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <div class="spinner-border" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Loading Modal -->
+<div class="modal fade" id="loadingModal" tabindex="-1" role="dialog" aria-labelledby="loadingModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <button class="btn btn-lg"><span class="glyphicon glyphicon-refresh spinning"></span> Loading...</button>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+            
+
+        // create account button click
+        $("#createBtn").click(function () {
+
+            let f_name = $("#fName").val();
+            let l_name = $("#lName").val();
+            let email = $("#email").val();
+            let pwd = $("#pwd").val();
+            let loc = $("#location").val();
+            let occupation = $("#occupation").val();
+
+                $.ajax({
+                    url: '/api/Account/Register',
+                    method: 'POST',
+                    data: {
+                        firstname: f_name,
+                        lastname: l_name,
+                        email: email,
+                        password: pwd,
+                        confirmPassword: pwd,
+                        location: loc,
+                        occupation: occupation
+                    },
+                    success: function (response) {
+                        toastr["success"]("Account Created Succesfully :)", "Success");
+                        $("#fName").val('');
+                        $("#lName").val('');
+                        $("#email").val('');
+                        $("#pwd").val('');
+                        $("#location").val('');
+                        $("#occupation").val('');
+
+                        $.ajax({
+                            // Post username, password & the grant type to /token
+                            url: '/token',
+                            method: 'POST',
+                            contentType: 'application/json',
+                            data: {
+                                username: email,
+                                password: pwd,
+                                grant_type: 'password'
+                            },
+                            success: function (response) {
+                                toastr["success"]("Hi, ", "Success");
+                                sessionStorage.setItem("accessToken", response.access_token);
+                                sessionStorage.setItem("userId", response.userId);
+                                window.location.href = "/Home/Survey";
+                            },
+                            // Display errors if any in the Bootstrap alert <div>
+                            error: function (jqXHR) {
+                                toastr["error"](jqXHR.responseText, "Error");
+                            }
+                        });
+                    },
+                    error: function (jqXHR) {
+                        toastr["error"]("401 BadRequest", "Error");
+                        console.log(jqXHR.responseText);
+                    }
+                });
+        });
+        $('#loginBtn').click(function () {
+            // Get the username & password from textboxes
+            var username = $('#user-email').val();
+            var password = $('#user-pwd').val();
+
+            //loading animation
+            $('#loadingModal').modal();
+
+            $.ajax({
+                // Post username, password & the grant type to /token
+                url: '/token',
+                method: 'POST',
+                contentType: 'application/json',
+                data: {
+                    username: username,
+                    password: password,
+                    grant_type: 'password'
+                },
+                success: function (response) {
+                    $('#loadingModal').modal('hide');
+                    $('#user-email').val('');
+                    $('#user-pwd').val('');
+                    toastr["success"]("Hi, " + username, "Success");
+                    sessionStorage.setItem("accessToken", response.access_token);
+                    sessionStorage.setItem("userId", response.userId);
+                    window.location.href = "/Home/Survey";
+                },
+                error: function (jqXHR) {
+                    $('#loadingModal').modal('hide');
+                    toastr["error"](jqXHR.responseText, "Error");
+                }
+            });
+
+            //$.ajax({
+            //    type: 'GET',
+            //    // Make sure to change the port number to
+            //    // where you have the employee service
+            //    // running on your local machine
+            //    url: '/api/values',
+            //    dataType: 'json',
+            //    // Specify the authentication header
+            //    // btoa() method encodes a string to Base64
+            //    headers: {
+            //        'Authorization': 'Basic ' + btoa(username + ':' + password)
+            //    },
+            //    success: function (data) {
+            //        console.log(data);
+            //    },
+            //    complete: function (jqXHR) {
+            //        if (jqXHR.status == '401') {
+            //            console.log(jqXHR.status + jqXHR.statusText);
+            //        }
+            //    }
+            //});
+        });
+
+        $("#user-pwd").on('keyup', function (e) {
+            if (e.key === 'Enter' || e.keyCode === 13) {
+                $('#loginBtn').click();
+            }
+        });
+
+        $('#surveyLink').click(function () {
+
+        });
+    })
+</script>
+
+<script>
+    toastr.options = {
+        "closeButton": true,
+        "debug": false,
+        "newestOnTop": false,
+        "progressBar": true,
+        "positionClass": "toast-top-center",
+        "preventDuplicates": false,
+        "onclick": null,
+        "showDuration": "300",
+        "hideDuration": "1000",
+        "timeOut": "2500",
+        "extendedTimeOut": "1000",
+        "showEasing": "swing",
+        "hideEasing": "linear",
+        "showMethod": "fadeIn",
+        "hideMethod": "fadeOut"
+    }
+</script>
