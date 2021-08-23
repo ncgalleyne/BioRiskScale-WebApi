@@ -23,7 +23,7 @@ namespace WebApplication4.Controllers
     {
         //Bio_Risk_ScaleEntities masterdb = new Bio_Risk_ScaleEntities();
         public ActionResult Index()
-        { 
+        {
             return View(baseModel);
         }
 

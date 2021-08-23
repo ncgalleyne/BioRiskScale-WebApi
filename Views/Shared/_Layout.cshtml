@@ -19,7 +19,7 @@
         <div class="container-fluid">
             @*Brand and toggle get grouped for better mobile display*@
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">BioRisk Survey</a>
+                <a class="navbar-brand" href="/Home/Index">BioRisk Survey</a>
             </div>
             @*Collect the nav links, forms, and other content for toggling*@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -75,11 +75,11 @@
                     <div class="modal-header">
                         <h3 class="modal-title" id="loginModalLabel">Hi, @User.Identity.Name</h3>
                         <div style="margin: 10px">
-                            <button id="logoutBtn" class="btn btn-info ">
-                                <span class="glyphicon glyphicon-log-out"></span>
-                                LogOut
-                            </button>
-                            <button type="button" id="closeBtn" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
+                            <div class="row"><a href="/Home/Profiles/@User.Identity.Name" id="profilesLink">Go To Profile</a></div>
+                            <div class="row">
+                                <button id="logoutBtn" class="btn btn-info "><span class="glyphicon glyphicon-log-out"></span>LogOut</button>
+                                <button type="button" id="closeBtn" class="btn btn-primary" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Close</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -178,8 +178,8 @@
         </div>
 
         @*<footer>
-                <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-            </footer>*@
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>*@
 
     </div>
 
@@ -187,7 +187,7 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 
-    @*<script>
+    <script>
             $("#createBtn").click(function () {
 
                 let f_name = $("#fName").val();
@@ -284,16 +284,25 @@
                 });
             });
             $('#logoutBtn').click(function () {
-                sessionStorage.removeItem('accessToken');
-                sessionStorage.removeItem('userId');
-                window.location.href = "/Home/Index";
+                $.ajax({
+                    url: "/api/Account/Logout",
+                    method: "post",
+                    headers: {
+                        'Authorization': 'Bearer ' + sessionStorage.getItem('accessToken')
+                    },
+                    success: function () {
+                        sessionStorage.removeItem('accessToken');
+                        sessionStorage.removeItem('userId');
+                        window.location.href = "/Home/Index";
+                    }
+                }); 
             });
             $("#user-pwd").on('keyup', function (e) {
                 if (e.key === 'Enter' || e.keyCode === 13) {
                     $('#loginBtn').click();
                 }
             });
-        </script>*@
+        </script>
     <script>
         toastr.options = {
             "closeButton": true,
