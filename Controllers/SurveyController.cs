@@ -23,9 +23,8 @@ namespace WebApplication1.Controllers
 
         public ActionResult Citations()
         {
-            ResevoirHostRegionVM model = new ResevoirHostRegionVM();
-            model.Metrics = GetCitationMetrics();
             baseModel.Metrics = GetCitationMetrics();
+            baseModel.Sources = GetCitationSources();
             return View(baseModel);
         }
 
@@ -932,6 +931,18 @@ namespace WebApplication1.Controllers
             Metrics m = new Metrics();
             m.MetricObjs = getmetricobjs();
             return m;
+        }
+        public List<SourceRecord> GetCitationSources()
+        {
+            List<SourceRecord> sourceRecords = masterdb.Bibliographies.Select(r => new SourceRecord()
+            {
+                Title = r.Source_Title,
+                MetricName = r.Metric_Name,
+                AgentName = r.Agent_Name,
+                Citation = r.Source_Citation,
+                Link = r.Source_Link
+            }).ToList();
+            return sourceRecords;
         }
 
         private List<MetricObj> getmetricobjs()

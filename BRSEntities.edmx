@@ -72,6 +72,17 @@ warning 6002: The table/view 'Bio_Risk_Scale.dbo._Geography' does not have a pri
           <Property Name="_Location" Type="nvarchar" MaxLength="50" />
           <Property Name="Occupation" Type="nvarchar" MaxLength="100" />
         </EntityType>
+        <EntityType Name="Bibliography">
+          <Key>
+            <PropertyRef Name="Source_Id" />
+          </Key>
+          <Property Name="Source_Id" Type="int" Nullable="false" />
+          <Property Name="Source_Title" Type="nvarchar" MaxLength="255" />
+          <Property Name="Metric_Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Agent_Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Source_Link" Type="nvarchar" MaxLength="255" />
+          <Property Name="Source_Citation" Type="nvarchar(max)" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'Bio_Risk_Scale.dbo.Bio_Clinical' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Bio_Clinical">
@@ -346,6 +357,7 @@ warning 6002: The table/view 'Bio_Risk_Scale.dbo.User_Accounts' does not have a 
         </Function>
         <EntityContainer Name="Bio_Risk_ScaleModelStoreContainer">
           <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bibliography" EntityType="Self.Bibliography" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Metric_Info" EntityType="Self.Metric_Info" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="_Geography" EntityType="Self._Geography" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -768,6 +780,7 @@ warning 6002: The table/view 'Bio_Risk_Scale.dbo.User_Accounts' does not have a 
             <Parameter Name="Occupation" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="Survey_History" EntityType="Bio_Risk_ScaleModel.Survey_History" />
+          <EntitySet Name="Bibliographies" EntityType="Bio_Risk_ScaleModel.Bibliography" />
         </EntityContainer>
         <ComplexType Name="Login_User_Acct_Result">
           <Property Type="Int32" Name="User_Id" Nullable="false" />
@@ -853,6 +866,17 @@ warning 6002: The table/view 'Bio_Risk_Scale.dbo.User_Accounts' does not have a 
           <Property Name="response" Type="Int32" Nullable="false" />
           <Property Name="user_id" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="C_Date" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Bibliography">
+          <Key>
+            <PropertyRef Name="Source_Id" />
+          </Key>
+          <Property Name="Source_Id" Type="Int32" Nullable="false" />
+          <Property Name="Source_Title" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Metric_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Agent_Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Source_Link" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Source_Citation" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1092,6 +1116,18 @@ warning 6002: The table/view 'Bio_Risk_Scale.dbo.User_Accounts' does not have a 
                 <ScalarProperty Name="Resevoir_Endemicity" ColumnName="Resevoir_Endemicity" />
                 <ScalarProperty Name="Resevoir_Type" ColumnName="Resevoir_Type" />
                 <ScalarProperty Name="Compliance" ColumnName="Compliance" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bibliographies">
+            <EntityTypeMapping TypeName="Bio_Risk_ScaleModel.Bibliography">
+              <MappingFragment StoreEntitySet="Bibliography">
+                <ScalarProperty Name="Source_Citation" ColumnName="Source_Citation" />
+                <ScalarProperty Name="Source_Link" ColumnName="Source_Link" />
+                <ScalarProperty Name="Agent_Name" ColumnName="Agent_Name" />
+                <ScalarProperty Name="Metric_Name" ColumnName="Metric_Name" />
+                <ScalarProperty Name="Source_Title" ColumnName="Source_Title" />
+                <ScalarProperty Name="Source_Id" ColumnName="Source_Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

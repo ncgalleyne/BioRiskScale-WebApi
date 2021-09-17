@@ -41,6 +41,7 @@ namespace WebApplication4
         public virtual DbSet<User_Accounts> User_Accounts { get; set; }
         public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
         public virtual DbSet<Survey_History> Survey_History { get; set; }
+        public virtual DbSet<Bibliography> Bibliographies { get; set; }
     
         public virtual ObjectResult<Nullable<int>> AddSurvey_Results(Nullable<int> compliance, Nullable<int> resevoir_Type, Nullable<int> resevoir_End, Nullable<int> host_End, Nullable<int> degree_of_contact, Nullable<int> number_of_possible_modes, Nullable<int> environmental_persistance, Nullable<int> infection_illness_overlap, Nullable<int> drug_treatment, Nullable<int> vaccine_Treatment, Nullable<int> generation_time, Nullable<int> duration_of_immunity, Nullable<int> cFR, Nullable<int> iFR, Nullable<int> history, Nullable<int> public_Awareness, Nullable<int> symptom_induced_fear, Nullable<int> uncertainty_of_Agent_Species, Nullable<int> uncertainty_of_Agent_Relatives, Nullable<int> detection, Nullable<int> system, Nullable<int> environment, Nullable<int> prevention, Nullable<int> response, string user_Id, Nullable<System.DateTime> date)
         {

@@ -1,0 +1,35 @@
+﻿@model WebApplication1.ViewModels.SurveyVM
+
+<table id="resultsTbl" class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Metric</th>
+            <th>Agent</th>
+            <th>Source</th>
+            <th>Citation</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            var count = 0;
+            foreach (var record in Model.Sources)
+            {
+                count++;
+                <tr>
+                    <td style="background-color:dimgray; color:white">@count</td>
+                    <td>@record.MetricName</td>
+                    <td>@record.AgentName</td>
+                    <td><a target="_blank" href="@record.Link">@record.Title</a></td>
+                    <td>@record.Citation</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+
+<script>
+    $('#resultsTbl').DataTable( {
+        "pagingType": "full_numbers"
+    } );
+</script>

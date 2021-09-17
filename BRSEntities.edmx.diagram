@@ -19,6 +19,7 @@
         <EntityTypeShape EntityType="Bio_Risk_ScaleModel.User_Accounts" Width="1.5" PointX="8.75" PointY="9.75" IsExpanded="true" />
         <EntityTypeShape EntityType="Bio_Risk_ScaleModel.AspNetUser" Width="1.5" PointX="0.75" PointY="10.75" />
         <EntityTypeShape EntityType="Bio_Risk_ScaleModel.Survey_History" Width="1.5" PointX="5.375" PointY="9.75" />
+        <EntityTypeShape EntityType="Bio_Risk_ScaleModel.Bibliography" Width="1.5" PointX="11.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

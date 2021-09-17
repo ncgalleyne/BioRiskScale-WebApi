@@ -9,6 +9,8 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css" />
+    <script src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"></script>
     <title>Citations</title>
 </head>
 <body>
@@ -42,5 +44,9 @@
 
         }
     </div>
+
+    @*input filter*@
+    @*metric () | agent (x)| ...*@
+    <div style="overflow-x:auto" class="row">@Html.Partial("_CitationTable", Model)</div>
 </body>
 </html>

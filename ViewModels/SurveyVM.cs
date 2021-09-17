@@ -14,5 +14,6 @@ namespace WebApplication1.ViewModels
         public Metrics Metrics { get; set; }
         public AccountUser AccountUser { get; set; }
         public IEnumerable<SurveyData> Data { get; set; }
+        public IEnumerable<SourceRecord> Sources { get; set; }
     }
 }
